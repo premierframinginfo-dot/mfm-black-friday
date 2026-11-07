@@ -23,6 +23,20 @@ a{color:#9A7638}a:hover{color:#7d5f2a}
 .buy{transition:opacity .15s}.buy:hover{opacity:.88;color:#fff}
 a[href^="#choose"]:hover{color:#fff}
 html{scroll-behavior:smooth}
+.tc{position:relative;text-align:center;overflow:hidden;min-width:0;display:flex;flex-direction:column}
+.tc-tag{position:absolute;top:0;left:50%;transform:translateX(-50%);background:#9A7638;color:#fff;font-size:10px;letter-spacing:2px;padding:4px 12px}
+.tc-top{padding:28px 20px 18px}
+.tc-paylab{display:block;font-size:13px;color:#777}
+.tc-pay{display:block;font-size:30px;font-weight:500;color:#444;margin-top:2px}
+.tc-in{display:flex;align-items:center;justify-content:center;color:#444;border-bottom:2px solid #DFD2B2;width:max-content;margin:2px auto 0;padding:0 6px 2px}
+.tc-in input{width:3ch;border:0;outline:0;background:transparent;font:inherit;color:#171717;text-align:center;padding:0;-moz-appearance:textfield}
+.tc-rule{height:1px;background:#DFD2B2;margin:0 20px}
+.tc-get{padding:18px 20px 8px}
+.tc-getlab{display:block;font-size:11px;letter-spacing:2px;color:#9A7638}
+.tc-getamt{display:block;font-size:46px;line-height:1.05;font-weight:700;color:#171717;margin-top:4px}
+.tc-free{display:inline-block;align-self:center;margin:8px 0 22px;background:#F6F1E6;color:#9A7638;font-size:12px;font-weight:600;letter-spacing:1.5px;padding:6px 14px;border-radius:999px}
+.tc-btn{display:block;margin:auto 20px 22px;color:#fff;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:2px;padding:15px 20px;min-height:44px;box-sizing:border-box}
+
 #custom-amt::-webkit-outer-spin-button,#custom-amt::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 body.pre .buy,body.closed .buy{opacity:.7;cursor:help}
 body.pre .buy[title]:hover,body.closed .buy[title]:hover{opacity:.85}
@@ -75,40 +89,36 @@ body.pre #state-note,body.closed #state-note{display:block}
   </section>
 
   <section style="padding: 24px 24px 16px 24px; max-width: 1100px; width: 100%; box-sizing: border-box; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px">
-    <div style="border: 1px solid #DFD2B2; padding: 28px 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; min-width: 0; position: relative">
-      <span style="font-size: 13px; color: #777">You pay</span>
-      <span style="font-size: 28px; font-weight: 500; color: #444">£200</span>
-      <span style="font-size: 11px; letter-spacing: 2px; color: #9A7638">YOU RECEIVE</span>
-      <span style="font-size: 40px; line-height: 1; font-weight: 600; color: #171717">£300</span>
-      <span style="font-size: 14px; font-weight: 600; color: #9A7638">£100 free</span>
-      <a href="#" class="buy" data-amount="200" style="display: inline-block; margin-top: 10px; background: #171717; color: #FFFFFF; text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 2px; padding: 14px 20px; min-height: 44px; box-sizing: border-box; width: 100%">BUY £200</a>
+    <div class="tc" style="border: 1px solid #DFD2B2">
+      <div class="tc-top"><span class="tc-paylab">You pay</span><span class="tc-pay">£200</span></div>
+      <div class="tc-rule"></div>
+      <div class="tc-get"><span class="tc-getlab">YOU RECEIVE</span><span class="tc-getamt">£300</span></div>
+      <span class="tc-free">£100 FREE</span>
+      <a href="#" class="buy tc-btn" data-amount="200" style="background: #171717">BUY £200</a>
     </div>
-    <div style="border: 1px solid #DFD2B2; padding: 28px 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; min-width: 0; position: relative">
-      <span style="font-size: 13px; color: #777">You pay</span>
-      <span style="font-size: 28px; font-weight: 500; color: #444">£500</span>
-      <span style="font-size: 11px; letter-spacing: 2px; color: #9A7638">YOU RECEIVE</span>
-      <span style="font-size: 40px; line-height: 1; font-weight: 600; color: #171717">£750</span>
-      <span style="font-size: 14px; font-weight: 600; color: #9A7638">£250 free</span>
-      <a href="#" class="buy" data-amount="500" style="display: inline-block; margin-top: 10px; background: #171717; color: #FFFFFF; text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 2px; padding: 14px 20px; min-height: 44px; box-sizing: border-box; width: 100%">BUY £500</a>
+    <div class="tc" style="border: 1px solid #DFD2B2">
+      <div class="tc-top"><span class="tc-paylab">You pay</span><span class="tc-pay">£500</span></div>
+      <div class="tc-rule"></div>
+      <div class="tc-get"><span class="tc-getlab">YOU RECEIVE</span><span class="tc-getamt">£750</span></div>
+      <span class="tc-free">£250 FREE</span>
+      <a href="#" class="buy tc-btn" data-amount="500" style="background: #171717">BUY £500</a>
     </div>
-    <div style="border: 2px solid #9A7638; padding: 28px 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; min-width: 0; position: relative">
-      <span style="position: absolute; top: -12px; background: #9A7638; color: #FFFFFF; font-size: 10px; letter-spacing: 2px; padding: 4px 10px">MOST POPULAR</span>
-      <span style="font-size: 13px; color: #777">You pay</span>
-      <span style="font-size: 28px; font-weight: 500; color: #444">£1,000</span>
-      <span style="font-size: 11px; letter-spacing: 2px; color: #9A7638">YOU RECEIVE</span>
-      <span style="font-size: 40px; line-height: 1; font-weight: 600; color: #171717">£1,500</span>
-      <span style="font-size: 14px; font-weight: 600; color: #9A7638">£500 free</span>
-      <a href="#" class="buy" data-amount="1000" style="display: inline-block; margin-top: 10px; background: #9A7638; color: #FFFFFF; text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 2px; padding: 14px 20px; min-height: 44px; box-sizing: border-box; width: 100%">BUY £1,000</a>
+    <div class="tc" style="border: 2px solid #9A7638">
+      <span class="tc-tag">MOST POPULAR</span>
+      <div class="tc-top"><span class="tc-paylab">You pay</span><span class="tc-pay">£1,000</span></div>
+      <div class="tc-rule"></div>
+      <div class="tc-get"><span class="tc-getlab">YOU RECEIVE</span><span class="tc-getamt">£1,500</span></div>
+      <span class="tc-free">£500 FREE</span>
+      <a href="#" class="buy tc-btn" data-amount="1000" style="background: #9A7638">BUY £1,000</a>
     </div>
-    <div style="border: 1px solid #DFD2B2; padding: 28px 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; min-width: 0">
-      <span style="font-size: 13px; color: #777">You pay</span>
-      <label style="display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 500; color: #444; border-bottom: 2px solid #DFD2B2; padding: 0 6px 2px">£<input id="custom-amt" type="number" inputmode="numeric" min="1" step="1" placeholder="Any" aria-label="Your amount in pounds" style="width: 3.2ch; min-width: 3.2ch; border: 0; outline: 0; background: transparent; font: inherit; color: #171717; text-align: center; padding: 0; -moz-appearance: textfield"></label>
-      <span style="font-size: 11px; letter-spacing: 2px; color: #9A7638">YOU RECEIVE</span>
-      <span id="custom-get" style="font-size: 40px; line-height: 1; font-weight: 600; color: #171717">+50%</span>
-      <span id="custom-free" style="font-size: 14px; font-weight: 600; color: #9A7638">Type an amount</span>
-      <a href="#" id="custom-buy" class="buy" data-amount="custom" style="display: inline-block; margin-top: 10px; background: #171717; color: #FFFFFF; text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 2px; padding: 14px 20px; min-height: 44px; box-sizing: border-box; width: 100%">CHOOSE AMOUNT</a>
+    <div class="tc" style="border: 1px solid #DFD2B2">
+      <div class="tc-top"><span class="tc-paylab">You pay</span><label class="tc-pay tc-in">£<input id="custom-amt" type="number" inputmode="numeric" min="1" step="1" placeholder="Any" aria-label="Your amount in pounds"></label></div>
+      <div class="tc-rule"></div>
+      <div class="tc-get"><span class="tc-getlab">YOU RECEIVE</span><span class="tc-getamt" id="custom-get">+50%</span></div>
+      <span class="tc-free" id="custom-free">TYPE AN AMOUNT</span>
+      <a href="#" id="custom-buy" class="buy tc-btn" data-amount="custom" style="background: #171717">CHOOSE AMOUNT</a>
     </div>
-</section>
+  </section>
   <p style="margin: 0; padding: 8px 24px 0 24px; text-align: center; font-size: 13px; color: #666">Secure checkout with card, Apple Pay or Google Pay. Prefer to talk to a human? <a href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher">Email Gary</a> or WhatsApp 07958 752226 and he'll sort it.</p>
   <p style="margin: 0; padding: 10px 24px 0 24px; text-align: center; font-size: 12px; color: #9A7638; letter-spacing: 1px">Closes at midnight on Monday 30 November. We won't be extending it.</p>
 
@@ -235,8 +245,8 @@ body.pre #state-note,body.closed #state-note{display:block}
   document.querySelectorAll(".buy").forEach(function(a){var u=LINKS[a.getAttribute("data-amount")];if(u){a.href=u;}else{a.href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher%20("+a.getAttribute("data-amount")+")";}});
   var inp=document.getElementById("custom-amt"),get=document.getElementById("custom-get"),fr=document.getElementById("custom-free"),cb=document.getElementById("custom-buy");
   function gbp(n){return "£"+Math.round(n).toLocaleString("en-GB")}
-  function custom(){var v=parseFloat(inp.value);if(!(v>0)){get.textContent="+50%";fr.textContent="Type an amount";cb.textContent="CHOOSE AMOUNT";cb.href=LINKS.custom||"mailto:gary@premierframing.com?subject=Black%20Friday%20voucher";return}
-    get.textContent=gbp(v*1.5);fr.textContent=gbp(v*0.5)+" free";cb.textContent="BUY "+gbp(v);
+  function custom(){var v=parseFloat(inp.value);if(!(v>0)){get.textContent="+50%";fr.textContent="TYPE AN AMOUNT";cb.textContent="CHOOSE AMOUNT";cb.href=LINKS.custom||"mailto:gary@premierframing.com?subject=Black%20Friday%20voucher";return}
+    get.textContent=gbp(v*1.5);fr.textContent=gbp(v*0.5)+" FREE";cb.textContent="BUY "+gbp(v);
     cb.href=LINKS.custom||("mailto:gary@premierframing.com?subject=Black%20Friday%20voucher%20"+encodeURIComponent(gbp(v))+"&body="+encodeURIComponent("Hi Gary, I'd like a Black Friday voucher. I'll pay "+gbp(v)+" for "+gbp(v*1.5)+" of framing credit."));}
   var soon=document.getElementById("soon");
   function openSoon(){
