@@ -40,6 +40,18 @@ html{scroll-behavior:smooth}
 #custom-amt::-webkit-outer-spin-button,#custom-amt::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 body.pre .buy,body.closed .buy{opacity:.7;cursor:help}
 body.pre .buy[title]:hover,body.closed .buy[title]:hover{opacity:.85}
+#talk{position:fixed;inset:0;background:rgba(10,10,10,.82);display:none;align-items:center;justify-content:center;padding:24px;z-index:50}
+#talk.on{display:flex}
+#talk .box{background:#171717;border:1px solid #9A7638;padding:36px 28px 28px;max-width:400px;width:100%;text-align:center;color:#fff;position:relative}
+#talk .x{position:absolute;top:10px;right:14px;background:none;border:0;color:#C4A468;font-size:26px;line-height:1;cursor:pointer}
+#talk .x:focus{outline:none}#talk .x:focus-visible{outline:1px solid #9A7638;outline-offset:2px}
+#talk .eyebrow{margin:0 0 10px;font-size:11px;letter-spacing:4px;color:#C4A468}
+#talk h3{margin:0 0 22px;font-size:20px;line-height:1.3;font-weight:600}
+#talk .opt{display:flex;justify-content:space-between;align-items:center;gap:16px;border:1px solid #3a3a3a;padding:14px 18px;margin-top:10px;color:#fff;text-decoration:none;text-align:left}
+#talk .opt:hover{border-color:#9A7638;color:#fff}
+#talk .opt b{font-size:14px;font-weight:600;letter-spacing:1px}
+#talk .opt span{font-size:13px;color:#C4A468}
+.talk{cursor:pointer}
 #soon{position:fixed;inset:0;background:rgba(10,10,10,.82);display:none;align-items:center;justify-content:center;padding:24px;z-index:50}
 #soon.on{display:flex}
 #soon .box{background:#171717;border:1px solid #9A7638;padding:36px 28px 32px;max-width:460px;width:100%;text-align:center;color:#fff;position:relative}
@@ -63,7 +75,7 @@ body.pre #state-note,body.closed #state-note{display:block}
 
   <header style="background: #171717; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
     <a href="https://misterframeman.co.uk" style="display: block"><img src="images/mfm-logo.png" alt="MisterFrameMan" style="width: 220px; height: auto; display: block"></a>
-    <p style="margin: 0; font-size: 13px; color: #FFFFFF"><a href="tel:+448000141007" style="color: inherit; text-decoration: none">Call</a> or <a href="https://wa.me/447958752226" target="_blank" rel="noopener" style="color: inherit; text-decoration: none">WhatsApp</a> <a href="tel:+448000141007" style="color: #C4A468; font-weight: 600; text-decoration: none">0800 0141007</a></p>
+    <p style="margin: 0; font-size: 13px; color: #FFFFFF"><a href="#contact" class="talk" style="color: inherit; text-decoration: none">Call or WhatsApp <span style="color: #C4A468; font-weight: 600">0800 0141007</span></a></p>
   </header>
 
   <section class="hero-bg" style="position: relative; padding: 96px 24px 88px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px">
@@ -120,7 +132,7 @@ body.pre #state-note,body.closed #state-note{display:block}
       <a href="#" id="custom-buy" class="buy tc-btn" data-amount="custom" style="background: #171717">CHOOSE AMOUNT</a>
     </div>
   </section>
-  <p style="margin: 0; padding: 8px 24px 0 24px; text-align: center; font-size: 13px; color: #666">Secure checkout with card, Apple Pay or Google Pay. Prefer to talk to a human? <a href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher">Email Gary</a> <a href="tel:+448000141007">call</a> or <a href="https://wa.me/447958752226" target="_blank" rel="noopener">WhatsApp</a> 0800 0141007 and he'll sort it.</p>
+  <p style="margin: 0; padding: 8px 24px 0 24px; text-align: center; font-size: 13px; color: #666">Secure checkout with card, Apple Pay or Google Pay. Prefer to talk to a human? <a href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher">Email Gary</a> <a href="#contact" class="talk">call or WhatsApp</a> and he'll sort it.</p>
   <p style="margin: 0; padding: 10px 24px 0 24px; text-align: center; font-size: 12px; color: #9A7638; letter-spacing: 1px">Closes at midnight on Monday 30 November. We won't be extending it.</p>
 
   <section style="margin-top: 72px; background: #171717; padding: 64px 24px; display: flex; flex-direction: column; align-items: center; gap: 36px">
@@ -207,7 +219,7 @@ body.pre #state-note,body.closed #state-note{display:block}
 
   <footer style="margin-top: 64px; background: #171717; padding: 36px 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center">
     <img src="images/mfm-logo.png" alt="MisterFrameMan" style="width: 180px; height: auto; display: block">
-    <p style="margin: 0; font-size: 14px; color: #FFFFFF"><a href="tel:+448000141007" style="color: inherit; text-decoration: none">Call</a> or <a href="https://wa.me/447958752226" target="_blank" rel="noopener" style="color: inherit; text-decoration: none">WhatsApp</a> <a href="tel:+448000141007" style="color: #C4A468; font-weight: 600; text-decoration: none">0800 0141007</a> · <a href="mailto:gary@premierframing.com" style="color: #C4A468">gary@premierframing.com</a></p>
+    <p style="margin: 0; font-size: 14px; color: #FFFFFF"><a href="#contact" class="talk" style="color: inherit; text-decoration: none">Call or WhatsApp <span style="color: #C4A468; font-weight: 600">0800 0141007</span></a> · <a href="mailto:gary@premierframing.com" style="color: #C4A468">gary@premierframing.com</a></p>
     <p style="margin: 0; font-size: 12px; line-height: 1.6; color: #9A9A9A">MisterFrameMan · Premier Framing Ltd · 50-56 Pitt Street, Norwich NR3 1DF · <a href="https://misterframeman.co.uk" style="color: #9A9A9A">misterframeman.co.uk</a></p>
   </footer>
 </div>
@@ -219,6 +231,16 @@ body.pre #state-note,body.closed #state-note{display:block}
     <p id="soon-p">Four days only, then it closes at midnight on Monday. Gary can hold one for you in the meantime.</p>
     <div class="cd" id="soon-cd"><div><b id="s-d">00</b><small>DAYS</small></div><i>:</i><div><b id="s-h">00</b><small>HOURS</small></div><i>:</i><div><b id="s-m">00</b><small>MINUTES</small></div><i>:</i><div><b id="s-s">00</b><small>SECONDS</small></div></div>
     <a class="go" id="soon-go" href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher%20-%20please%20hold%20one%20for%20me">EMAIL GARY TO RESERVE ONE</a>
+  </div>
+</div>
+<div id="talk" role="dialog" aria-modal="true" aria-labelledby="talk-h">
+  <div class="box">
+    <button class="x" type="button" aria-label="Close">&times;</button>
+    <p class="eyebrow">TALK TO GARY</p>
+    <h3 id="talk-h">How would you like to get in touch?</h3>
+    <a class="opt" href="tel:+448000141007"><b>Call</b><span>0800 0141007</span></a>
+    <a class="opt" href="https://wa.me/447958752226" target="_blank" rel="noopener"><b>WhatsApp</b><span>07958 752226</span></a>
+    <a class="opt" href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher"><b>Email</b><span>gary@premierframing.com</span></a>
   </div>
 </div>
 <script>
@@ -260,8 +282,11 @@ body.pre #state-note,body.closed #state-note{display:block}
     soon.classList.add("on");soon.querySelector(".x").focus();
   }
   function closeSoon(){soon.classList.remove("on")}
+  var talk=document.getElementById("talk");
+  document.querySelectorAll(".talk").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();talk.classList.add("on");talk.querySelector(".x").focus();});});
+  talk.querySelector(".x").addEventListener("click",function(){talk.classList.remove("on")});talk.addEventListener("click",function(e){if(e.target===talk)talk.classList.remove("on")});
   document.querySelectorAll(".buy").forEach(function(a){a.addEventListener("click",function(e){if(body.className==="pre"||body.className==="closed"){e.preventDefault();e.stopImmediatePropagation();openSoon();}},true);});
-  soon.querySelector(".x").addEventListener("click",closeSoon);soon.addEventListener("click",function(e){if(e.target===soon)closeSoon()});document.addEventListener("keydown",function(e){if(e.key==="Escape")closeSoon()});
+  soon.querySelector(".x").addEventListener("click",closeSoon);soon.addEventListener("click",function(e){if(e.target===soon)closeSoon()});document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeSoon();talk.classList.remove("on");}});
   function titles(){var t=body.className==="pre"?"Opens Thursday 26 November at 5pm":body.className==="closed"?"Closed at midnight on Monday 30 November":"";document.querySelectorAll(".buy").forEach(function(a){if(t)a.setAttribute("title",t);else a.removeAttribute("title")});}
   setInterval(titles,1000);titles();
   function fit(){var n=(inp.value||"").length;inp.style.width=Math.max(3,n*0.95+0.3)+"ch"}
