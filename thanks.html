@@ -79,6 +79,7 @@ body.pre #state-note,body.closed #state-note{display:block}
 <main style="max-width: 680px; margin: 0 auto; padding: 72px 24px 80px; text-align: center">
   <p style="margin: 0 0 14px; font-size: 12px; letter-spacing: 4px; color: #9A7638">PAYMENT RECEIVED</p>
   <h1 style="margin: 0 0 18px; font-size: 40px; line-height: 1.15; font-weight: 600; color: #171717">Thank you. That's done.</h1>
+  <p id="figure" style="display: none; margin: 0 auto 22px; max-width: 420px; background: #171717; border: 1px solid #9A7638; padding: 18px 22px; color: #FFFFFF; font-size: 15px; line-height: 1.6">You paid <strong id="f-pay" style="color: #DFD2B2"></strong>. Your framing credit is <strong id="f-get" style="color: #DFD2B2; font-size: 22px"></strong>.</p>
   <p style="margin: 0 0 14px; font-size: 17px; line-height: 1.6; color: #444">Your payment has gone through. Stripe is emailing you a receipt now, and Gary will email your confirmation with the credit on your account, ready to use from 31 January 2027.</p>
   <p style="margin: 0 0 36px; font-size: 15px; line-height: 1.6; color: #666">If you told us it's a gift, he'll be in touch about the note. Questions in the meantime? Email <a href="mailto:gary@premierframing.com" style="color: #9A7638">gary@premierframing.com</a> or call or WhatsApp 0800 0141007.</p>
   <div style="background: #171717; border: 1px solid #9A7638; padding: 28px 24px; text-align: left; display: grid; gap: 14px">
@@ -92,5 +93,8 @@ body.pre #state-note,body.closed #state-note{display:block}
 <footer style="background: #171717; padding: 28px 24px; text-align: center">
   <p style="margin: 0; font-size: 11px; line-height: 1.6; color: #9A9A9A">MisterFrameMan · Premier Framing Ltd · 50-56 Pitt Street, Norwich NR3 1DF</p>
 </footer>
+<script>
+(function(){try{var d=JSON.parse(localStorage.getItem("mfm_bf26")||"null");if(d&&d.pay>0&&Date.now()-d.at<864e5){var g=function(n){return "£"+Math.round(n).toLocaleString("en-GB")};document.getElementById("f-pay").textContent=g(d.pay);document.getElementById("f-get").textContent=g(d.get);document.getElementById("figure").style.display="block";}}catch(e){}})();
+</script>
 </body>
 </html>
