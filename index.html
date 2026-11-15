@@ -263,7 +263,7 @@ body.pre #state-note,body.closed #state-note{display:block}
      CLOSE is when everything ends. Examples for the five options are in README.md. */
   var SCHEDULE=[
     {start:"2026-11-23T09:00:00+00:00", rate:0.5, vip:true},              /* VIP window: only people who arrive with ?vip=early see it */
-    {start:"2026-11-26T17:00:00+00:00", rate:0.5, min:500, below:0.3},    /* public: 30% any amount, 50% on £500+ */
+    {start:"2026-11-26T17:00:00+00:00", rate:0.35, min:500, below:0.3},   /* public: 30% any amount, 35% on £500+ */
     {start:"2026-11-30T00:00:00+00:00", rate:0.45}                        /* Cyber Monday: 45% any amount, emailed to non-buyers */
   ];
   var CLOSE=new Date("2026-11-30T23:59:00+00:00").getTime();

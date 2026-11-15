@@ -10,14 +10,16 @@ Static page, no build. Pushing to `main` publishes it on GitHub Pages within abo
 
 Edit `SCHEDULE` in `index.html`. Each row is when a rate starts (UK time), the extra as a fraction, and optionally a threshold (`min`, with `below` for amounts under it). The page recalculates every card, the any-amount box, the gold line under the heading and the Stripe reference on every button.
 
-Option 1 (VIP 50%, public 30% with 50% over £500, Cyber Monday 50% over £300):
+Option 1 as chosen (VIP 50%, public 30% with 35% over £500, Cyber Monday 45% for non-buyers):
 ```
 var SCHEDULE=[
-  {start:"2026-11-23T09:00:00+00:00", rate:0.5},                          // VIP window (send the link only to VIPs)
-  {start:"2026-11-26T17:00:00+00:00", rate:0.5, min:500, below:0.3},
-  {start:"2026-11-30T00:00:00+00:00", rate:0.5, min:300, below:0.3}
+  {start:"2026-11-23T09:00:00+00:00", rate:0.5, vip:true},                // VIP window: only ?vip=early sees it
+  {start:"2026-11-26T17:00:00+00:00", rate:0.35, min:500, below:0.3},
+  {start:"2026-11-30T00:00:00+00:00", rate:0.45}
 ];
 ```
+Every email's `<head>` needs `<meta name="color-scheme" content="light only">` and `<meta name="supported-color-schemes" content="light">` so the Gmail app does not flip the dark design (tested 15 Nov 2026).
+
 Option 2 (50% on Black Friday, then 5% a day):
 ```
 var SCHEDULE=[
