@@ -81,9 +81,9 @@ body.pre #state-note,body.closed #state-note{display:block}
 
   <section class="hero-bg" style="position: relative; padding: 96px 24px 88px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px">
     <div style="position: absolute; inset: 0; background: rgba(10,10,10,0.78)"></div>
-    <p style="position: relative; margin: 0; font-size: 12px; letter-spacing: 4px; color: #C4A468">BLACK FRIDAY · FOUR DAYS ONLY</p>
-    <h1 style="position: relative; margin: 0; font-size: 56px; line-height: 1.05; font-weight: 600; letter-spacing: 3px; color: #FFFFFF; max-width: 860px">BLACK FRIDAY<br><span style="font-weight: 400">50% EXTRA FREE</span></h1>
-    <p style="position: relative; margin: 0; font-size: 20px; line-height: 1.6; font-weight: 500; color: #FFFFFF; text-shadow: 0 1px 10px rgba(0,0,0,0.7); max-width: 720px">Buy a MisterFrameMan voucher and receive 50% extra free.<br>For example: spend £200 and receive framing credit for £300.</p>
+    <p id="hero-eyebrow" style="position: relative; margin: 0; font-size: 12px; letter-spacing: 4px; color: #C4A468">BLACK FRIDAY · FOUR DAYS ONLY</p>
+    <h1 style="position: relative; margin: 0; font-size: 56px; line-height: 1.05; font-weight: 600; letter-spacing: 3px; color: #FFFFFF; max-width: 860px">BLACK FRIDAY<br><span id="hero-rate" style="font-weight: 400">50% EXTRA FREE</span></h1>
+    <p style="position: relative; margin: 0; font-size: 20px; line-height: 1.6; font-weight: 500; color: #FFFFFF; text-shadow: 0 1px 10px rgba(0,0,0,0.7); max-width: 720px" id="hero-ex">Buy a MisterFrameMan voucher and receive 50% extra free.<br>For example: spend £200 and receive framing credit for £300.</p>
     <p id="cd-label" style="position: relative; margin: 14px 0 0; font-size: 18px; font-weight: 700; letter-spacing: 5px; color: #DFD2B2">CLOSES IN</p>
     <div style="position: relative; display: flex; gap: 10px; align-items: flex-end; margin-top: 10px">
       <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><span id="cd-d" style="font-size: 40px; line-height: 1; font-weight: 600; color: #FFFFFF">03</span><span style="font-size: 10px; letter-spacing: 2px; color: #9A9A9A">DAYS</span></div>
@@ -98,7 +98,7 @@ body.pre #state-note,body.closed #state-note{display:block}
   </section>
 
   <section id="choose" style="padding: 72px 24px 24px 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
-    <h2 style="margin: 0; font-size: 30px; line-height: 1.2; font-weight: 600; color: #9A7638">Buy a Voucher &amp; Receive 50% Extra Free</h2>
+    <h2 id="choose-h" style="margin: 0; font-size: 30px; line-height: 1.2; font-weight: 600; color: #9A7638">Buy a Voucher &amp; Receive 50% Extra Free</h2>
     <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #444; max-width: 620px">Pick an amount, or choose your own. There's no minimum and no maximum. Your confirmation arrives by email: Gary confirms the credit on your account, ready to use from 31 January 2027.</p>
     <p id="rate-now" style="margin: 6px 0 0; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #9A7638"></p>
   </section>
@@ -262,7 +262,9 @@ body.pre #state-note,body.closed #state-note{display:block}
      Rows must be in date order. The first row's start is when the page opens;
      CLOSE is when everything ends. Examples for the five options are in README.md. */
   var SCHEDULE=[
-    {start:"2026-11-15T17:30:00+00:00", rate:0.5} /* TEMPORARY: opened early for testing. Put back to 2026-11-26T17:00:00+00:00 */
+    {start:"2026-11-23T09:00:00+00:00", rate:0.5, vip:true},              /* VIP window: only people who arrive with ?vip=early see it */
+    {start:"2026-11-26T17:00:00+00:00", rate:0.5, min:500, below:0.3},    /* public: 30% any amount, 50% on £500+ */
+    {start:"2026-11-30T00:00:00+00:00", rate:0.45}                        /* Cyber Monday: 45% any amount, emailed to non-buyers */
   ];
   var CLOSE=new Date("2026-11-30T23:59:00+00:00").getTime();
   var LINKS={ /* Stripe Payment Links. TEST links for now; swap for live ones when Stripe is verified. */
@@ -271,9 +273,23 @@ body.pre #state-note,body.closed #state-note{display:block}
     "1000":"https://buy.stripe.com/test_6oU28r1OweVveFh2bl1Jm02",
     "custom":"https://buy.stripe.com/test_28EeVd3WE6oZfJlcPZ1Jm03"
   };
-  var OPEN=new Date(SCHEDULE[0].start).getTime();
+  var VIP_KEY="early"; /* VIP email links point at ?vip=early */
+  var isVip=false;try{var q=new URLSearchParams(location.search).get("vip");if(q===VIP_KEY){localStorage.setItem("mfm_vip","1")}isVip=localStorage.getItem("mfm_vip")==="1"}catch(e){isVip=/[?&]vip=early/.test(location.search)}
   SCHEDULE.forEach(function(r){r.t=new Date(r.start).getTime()});
-  function currentRow(){var now=Date.now(),row=SCHEDULE[0];SCHEDULE.forEach(function(r){if(now>=r.t)row=r});return row}
+  var visible=SCHEDULE.filter(function(r){return isVip||!r.vip});
+  var OPEN=visible[0].t;
+  function currentRow(){var now=Date.now(),row=visible[0];visible.forEach(function(r){if(now>=r.t)row=r});return row}
+  /* before opening, currentRow() is the first visible row, so the cards preview what opens */
+  function nextRow(){var now=Date.now();for(var i=0;i<visible.length;i++){if(visible[i].t>now)return visible[i]}return null}
+  function topRate(r){return r.rate}
+  function headline(r){
+    document.getElementById("hero-rate").textContent=pct(topRate(r))+" EXTRA FREE";
+    var ex=r.min!=null?("Spend "+gbp(r.min)+" or more on a MisterFrameMan voucher and receive "+pct(r.rate)+" extra free. Under "+gbp(r.min)+", "+pct(r.below)+" extra.<br>For example: spend "+gbp(r.min)+" and receive framing credit for "+gbp(r.min*(1+r.rate))+".")
+      :("Buy a MisterFrameMan voucher and receive "+pct(r.rate)+" extra free.<br>For example: spend £200 and receive framing credit for "+gbp(200*(1+r.rate))+".");
+    document.getElementById("hero-ex").innerHTML=ex;
+    document.getElementById("choose-h").innerHTML="Buy a Voucher &amp; Receive "+pct(topRate(r))+" Extra Free"+(r.min!=null?" on "+gbp(r.min)+"+":"");
+    var eb=document.getElementById("hero-eyebrow");if(eb)eb.textContent=r.vip?"BLACK FRIDAY · VIP EARLY ACCESS":"BLACK FRIDAY · FOUR DAYS ONLY";
+  }
   function rateFor(amount){var r=currentRow();if(r.min!=null&&amount<r.min)return r.below;return r.rate}
   function pct(x){return Math.round(x*100)+"%"}
   function linkFor(key,amount){var u=LINKS[key];if(!u)return "";var rate=rateFor(amount);var ref="bf26-r"+Math.round(rate*100)+"-pay"+Math.round(amount)+"-get"+Math.round(amount*(1+rate));return u+(u.indexOf("?")>-1?"&":"?")+"client_reference_id="+encodeURIComponent(ref)}
@@ -281,7 +297,7 @@ body.pre #state-note,body.closed #state-note{display:block}
     document.querySelectorAll("[data-get]").forEach(function(el){var a=+el.getAttribute("data-get");el.textContent=gbp(a*(1+rateFor(a)))});
     document.querySelectorAll("[data-free]").forEach(function(el){var a=+el.getAttribute("data-free");el.textContent=gbp(a*rateFor(a))+" FREE"});
     document.querySelectorAll(".buy[data-amount]").forEach(function(a){var k=a.getAttribute("data-amount");if(k==="custom")return;var u=linkFor(k,+k);a.href=u||("mailto:gary@premierframing.com?subject=Black%20Friday%20voucher%20("+k+")")});
-    var r=currentRow(),tag=document.getElementById("rate-now");if(tag){tag.textContent=r.min!=null?(pct(r.rate)+" extra on £"+r.min.toLocaleString("en-GB")+" and above, "+pct(r.below)+" below"):(pct(r.rate)+" extra free on any amount")}
+    var r=currentRow();headline(r);var tag=document.getElementById("rate-now");if(tag){var nx=nextRow(),when=nx&&r.vip&&Date.now()>=OPEN?(" · changes "+["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(nx.t).getDay()]+" "+(new Date(nx.t).getHours()===0?"midnight":new Date(nx.t).getHours()+":00")):"";tag.textContent=(r.min!=null?(pct(r.rate)+" extra on £"+r.min.toLocaleString("en-GB")+" and above, "+pct(r.below)+" below"):(pct(r.rate)+" extra free on any amount"))+when}
   }
   var body=document.body, note=document.getElementById("state-note");
   if(!note){note=document.createElement("p");note.id="state-note";var ch=document.getElementById("choose");ch.parentNode.insertBefore(note,ch.nextSibling);}
@@ -289,7 +305,7 @@ body.pre #state-note,body.closed #state-note{display:block}
   function gbp(n){return "£"+Math.round(n).toLocaleString("en-GB")}
   function tick(){
     var now=Date.now(), target, label;
-    if(now<OPEN){body.className="pre";target=OPEN;label="OPENS IN";note.textContent="Opens at 5pm on Thursday 26 November. The buttons go live then.";}
+    if(now<OPEN){body.className="pre";target=OPEN;label="OPENS IN";note.textContent=isVip?"Your early access opens at 9am on Monday 23 November.":"Opens at 5pm on Thursday 26 November. The buttons go live then.";}
     else if(now<CLOSE){body.className="";target=CLOSE;label="CLOSES IN";}
     else{body.className="closed";target=now;label="CLOSED";note.textContent="This year's voucher has now closed. Thank you to everyone who bought one.";}
     var t=Math.max(0,target-now);
@@ -311,7 +327,7 @@ body.pre #state-note,body.closed #state-note{display:block}
   function openSoon(){
     var closed=body.className==="closed";
     document.getElementById("soon-eyebrow").textContent=closed?"CLOSED":"NOT QUITE YET";
-    document.getElementById("soon-h").textContent=closed?"Closed at midnight, Monday 30 November":"Opens Thursday 26 November, 5pm";
+    document.getElementById("soon-h").textContent=closed?"Closed at midnight, Monday 30 November":(isVip?"Your early access opens Monday 23 November, 9am":"Opens Thursday 26 November, 5pm");
     document.getElementById("soon-p").textContent=closed?"As promised, no extension. For framing at the usual prices, Gary is a message away.":"Four days only, then it closes at midnight on Monday. Gary can hold one for you in the meantime.";
     document.getElementById("soon-cd").style.display=closed?"none":"flex";
     document.getElementById("soon-go").textContent=closed?"EMAIL GARY":"EMAIL GARY TO RESERVE ONE";
@@ -324,7 +340,7 @@ body.pre #state-note,body.closed #state-note{display:block}
   document.querySelectorAll(".buy").forEach(function(a){a.addEventListener("click",function(e){if(body.className==="pre"||body.className==="closed"){e.preventDefault();e.stopImmediatePropagation();openSoon();return;}
     var k=a.getAttribute("data-amount"),amt=k==="custom"?parseFloat(inp.value):+k;if(amt>0){var rate=rateFor(amt);try{localStorage.setItem("mfm_bf26",JSON.stringify({custom:k==="custom",pay:amt,get:Math.round(amt*(1+rate)),rate:rate,row:currentRow(),at:Date.now()}))}catch(err){}}},true);});
   soon.querySelector(".x").addEventListener("click",closeSoon);soon.addEventListener("click",function(e){if(e.target===soon)closeSoon()});document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeSoon();talk.classList.remove("on");}});
-  function titles(){var t=body.className==="pre"?"Opens Thursday 26 November at 5pm":body.className==="closed"?"Closed at midnight on Monday 30 November":"";document.querySelectorAll(".buy").forEach(function(a){if(t)a.setAttribute("title",t);else a.removeAttribute("title")});}
+  function titles(){var t=body.className==="pre"?(isVip?"Early access opens Monday 23 November at 9am":"Opens Thursday 26 November at 5pm"):body.className==="closed"?"Closed at midnight on Monday 30 November":"";document.querySelectorAll(".buy").forEach(function(a){if(t)a.setAttribute("title",t);else a.removeAttribute("title")});}
   setInterval(titles,1000);titles();
   function fit(){var n=(inp.value||"").length;inp.style.width=Math.max(3,n*0.95+0.3)+"ch"}
   inp.addEventListener("input",function(){fit();custom()});fit();cb.addEventListener("click",function(e){if(!(parseFloat(inp.value)>0)){e.preventDefault();inp.focus();}});
