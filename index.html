@@ -35,6 +35,7 @@ html{scroll-behavior:smooth}
 .tc-getlab{display:block;font-size:11px;letter-spacing:2px;color:#9A7638}
 .tc-getamt{display:block;font-size:46px;line-height:1.05;font-weight:700;color:#171717;margin-top:4px}
 .tc-free{display:inline-block;align-self:center;margin:8px 0 22px;background:#F6F1E6;color:#9A7638;font-size:12px;font-weight:600;letter-spacing:1.5px;padding:6px 14px;border-radius:999px}
+.tc-note{display:block;font-size:11px;color:#8a8478;margin:-14px 20px 18px;line-height:1.4}
 .tc-btn{display:block;margin:auto 20px 22px;color:#fff;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:2px;padding:15px 20px;min-height:44px;box-sizing:border-box}
 
 #custom-amt::-webkit-outer-spin-button,#custom-amt::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
@@ -98,30 +99,31 @@ body.pre #state-note,body.closed #state-note{display:block}
 
   <section id="choose" style="padding: 72px 24px 24px 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
     <h2 style="margin: 0; font-size: 30px; line-height: 1.2; font-weight: 600; color: #9A7638">Buy a Voucher &amp; Receive 50% Extra Free</h2>
-    <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #444; max-width: 620px">Pick an amount, or choose your own. There's no minimum and no maximum. Your voucher arrives by email within one working day and can be used from 31 January 2027.</p>
+    <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #444; max-width: 620px">Pick an amount, or choose your own. There's no minimum and no maximum. Your confirmation arrives by email: Gary confirms the credit on your account, ready to use from 31 January 2027.</p>
+    <p id="rate-now" style="margin: 6px 0 0; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #9A7638"></p>
   </section>
 
   <section style="padding: 24px 24px 16px 24px; max-width: 1100px; width: 100%; box-sizing: border-box; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px">
     <div class="tc" style="border: 1px solid #DFD2B2">
       <div class="tc-top"><span class="tc-paylab">You pay</span><span class="tc-pay">£200</span></div>
       <div class="tc-rule"></div>
-      <div class="tc-get"><span class="tc-getlab">YOU RECEIVE</span><span class="tc-getamt">£300</span></div>
-      <span class="tc-free">£100 FREE</span>
+      <div class="tc-get"><span class="tc-getlab">YOU RECEIVE</span><span class="tc-getamt" data-get="200">£300</span></div>
+      <span class="tc-free" data-free="200">£100 FREE</span>
       <a href="#" class="buy tc-btn" data-amount="200" style="background: #171717">BUY £200</a>
     </div>
     <div class="tc" style="border: 1px solid #DFD2B2">
       <div class="tc-top"><span class="tc-paylab">You pay</span><span class="tc-pay">£500</span></div>
       <div class="tc-rule"></div>
-      <div class="tc-get"><span class="tc-getlab">YOU RECEIVE</span><span class="tc-getamt">£750</span></div>
-      <span class="tc-free">£250 FREE</span>
+      <div class="tc-get"><span class="tc-getlab">YOU RECEIVE</span><span class="tc-getamt" data-get="500">£750</span></div>
+      <span class="tc-free" data-free="500">£250 FREE</span>
       <a href="#" class="buy tc-btn" data-amount="500" style="background: #171717">BUY £500</a>
     </div>
     <div class="tc" style="border: 2px solid #9A7638">
       <span class="tc-tag">MOST POPULAR</span>
       <div class="tc-top"><span class="tc-paylab">You pay</span><span class="tc-pay">£1,000</span></div>
       <div class="tc-rule"></div>
-      <div class="tc-get"><span class="tc-getlab">YOU RECEIVE</span><span class="tc-getamt">£1,500</span></div>
-      <span class="tc-free">£500 FREE</span>
+      <div class="tc-get"><span class="tc-getlab">YOU RECEIVE</span><span class="tc-getamt" data-get="1000">£1,500</span></div>
+      <span class="tc-free" data-free="1000">£500 FREE</span>
       <a href="#" class="buy tc-btn" data-amount="1000" style="background: #9A7638">BUY £1,000</a>
     </div>
     <div class="tc" style="border: 1px solid #DFD2B2">
@@ -130,6 +132,7 @@ body.pre #state-note,body.closed #state-note{display:block}
       <div class="tc-get"><span class="tc-getlab">YOU RECEIVE</span><span class="tc-getamt" id="custom-get">+50%</span></div>
       <span class="tc-free" id="custom-free">TYPE AN AMOUNT</span>
       <a href="#" id="custom-buy" class="buy tc-btn" data-amount="custom" style="background: #171717">CHOOSE AMOUNT</a>
+      <span class="tc-note">You'll type the same amount again on the payment page.</span>
     </div>
   </section>
   <p style="margin: 0; padding: 8px 24px 0 24px; text-align: center; font-size: 13px; color: #666">Secure checkout with card, Apple Pay or Google Pay. Prefer to talk to a human? <a href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher">Email Gary</a> <a href="#contact" class="talk">call or WhatsApp</a> and he'll sort it.</p>
@@ -253,12 +256,37 @@ body.pre #state-note,body.closed #state-note{display:block}
 </div>
 <script>
 (function(){
-  var OPEN=new Date("2026-11-26T17:00:00+00:00").getTime();
+  /* ---- THE ONLY PART TO EDIT WHEN GARY DECIDES ----
+     Each row: when it starts (UK time), the extra as a fraction, and optionally a
+     threshold: amounts at or above "min" get "rate", amounts below get "below".
+     Rows must be in date order. The first row's start is when the page opens;
+     CLOSE is when everything ends. Examples for the five options are in README.md. */
+  var SCHEDULE=[
+    {start:"2026-11-26T17:00:00+00:00", rate:0.5}
+  ];
   var CLOSE=new Date("2026-11-30T23:59:00+00:00").getTime();
-  var LINKS={"200":"","500":"","1000":"","custom":""}; /* Stripe checkout links go here */
+  var LINKS={ /* Stripe Payment Links. TEST links for now; swap for live ones when Stripe is verified. */
+    "200":"https://buy.stripe.com/test_28E9ATdxefZz2Wz8zJ1Jm00",
+    "500":"https://buy.stripe.com/test_28E5kD1OwdRrdBdg2b1Jm01",
+    "1000":"https://buy.stripe.com/test_6oU28r1OweVveFh2bl1Jm02",
+    "custom":"https://buy.stripe.com/test_28EeVd3WE6oZfJlcPZ1Jm03"
+  };
+  var OPEN=new Date(SCHEDULE[0].start).getTime();
+  SCHEDULE.forEach(function(r){r.t=new Date(r.start).getTime()});
+  function currentRow(){var now=Date.now(),row=SCHEDULE[0];SCHEDULE.forEach(function(r){if(now>=r.t)row=r});return row}
+  function rateFor(amount){var r=currentRow();if(r.min!=null&&amount<r.min)return r.below;return r.rate}
+  function pct(x){return Math.round(x*100)+"%"}
+  function linkFor(key,amount){var u=LINKS[key];if(!u)return "";var rate=rateFor(amount);var ref="bf26-r"+Math.round(rate*100)+"-pay"+Math.round(amount)+"-get"+Math.round(amount*(1+rate));return u+(u.indexOf("?")>-1?"&":"?")+"client_reference_id="+encodeURIComponent(ref)}
+  function refreshCards(){
+    document.querySelectorAll("[data-get]").forEach(function(el){var a=+el.getAttribute("data-get");el.textContent=gbp(a*(1+rateFor(a)))});
+    document.querySelectorAll("[data-free]").forEach(function(el){var a=+el.getAttribute("data-free");el.textContent=gbp(a*rateFor(a))+" FREE"});
+    document.querySelectorAll(".buy[data-amount]").forEach(function(a){var k=a.getAttribute("data-amount");if(k==="custom")return;var u=linkFor(k,+k);a.href=u||("mailto:gary@premierframing.com?subject=Black%20Friday%20voucher%20("+k+")")});
+    var r=currentRow(),tag=document.getElementById("rate-now");if(tag){tag.textContent=r.min!=null?(pct(r.rate)+" extra on £"+r.min.toLocaleString("en-GB")+" and above, "+pct(r.below)+" below"):(pct(r.rate)+" extra free on any amount")}
+  }
   var body=document.body, note=document.getElementById("state-note");
   if(!note){note=document.createElement("p");note.id="state-note";var ch=document.getElementById("choose");ch.parentNode.insertBefore(note,ch.nextSibling);}
   function pad(n){return (n<10?"0":"")+n}
+  function gbp(n){return "£"+Math.round(n).toLocaleString("en-GB")}
   function tick(){
     var now=Date.now(), target, label;
     if(now<OPEN){body.className="pre";target=OPEN;label="OPENS IN";note.textContent="Opens at 5pm on Thursday 26 November. The buttons go live then.";}
@@ -266,6 +294,7 @@ body.pre #state-note,body.closed #state-note{display:block}
     else{body.className="closed";target=now;label="CLOSED";note.textContent="This year's voucher has now closed. Thank you to everyone who bought one.";}
     var t=Math.max(0,target-now);
     document.getElementById("cd-label").textContent=label;
+    refreshCards();
     document.getElementById("cd-d").textContent=pad(Math.floor(t/864e5));
     document.getElementById("cd-h").textContent=pad(Math.floor(t%864e5/36e5));
     document.getElementById("cd-m").textContent=pad(Math.floor(t%36e5/6e4));
@@ -273,12 +302,11 @@ body.pre #state-note,body.closed #state-note{display:block}
     document.getElementById("s-d").textContent=pad(Math.floor(t/864e5));document.getElementById("s-h").textContent=pad(Math.floor(t%864e5/36e5));
     document.getElementById("s-m").textContent=pad(Math.floor(t%36e5/6e4));document.getElementById("s-s").textContent=pad(Math.floor(t%6e4/1e3));
   }
-  document.querySelectorAll(".buy").forEach(function(a){var u=LINKS[a.getAttribute("data-amount")];if(u){a.href=u;}else{a.href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher%20("+a.getAttribute("data-amount")+")";}});
   var inp=document.getElementById("custom-amt"),get=document.getElementById("custom-get"),fr=document.getElementById("custom-free"),cb=document.getElementById("custom-buy");
-  function gbp(n){return "£"+Math.round(n).toLocaleString("en-GB")}
-  function custom(){var v=parseFloat(inp.value);if(!(v>0)){get.textContent="+50%";fr.textContent="TYPE AN AMOUNT";cb.textContent="CHOOSE AMOUNT";cb.href=LINKS.custom||"mailto:gary@premierframing.com?subject=Black%20Friday%20voucher";return}
-    get.textContent=gbp(v*1.5);fr.textContent=gbp(v*0.5)+" FREE";cb.textContent="BUY "+gbp(v);
-    cb.href=LINKS.custom||("mailto:gary@premierframing.com?subject=Black%20Friday%20voucher%20"+encodeURIComponent(gbp(v))+"&body="+encodeURIComponent("Hi Gary, I'd like a Black Friday voucher. I'll pay "+gbp(v)+" for "+gbp(v*1.5)+" of framing credit."));}
+  function custom(){var v=parseFloat(inp.value);var r=currentRow();
+    if(!(v>0)){get.textContent="+"+pct(r.rate);fr.textContent="TYPE AN AMOUNT";cb.textContent="CHOOSE AMOUNT";cb.href=LINKS.custom||"mailto:gary@premierframing.com?subject=Black%20Friday%20voucher";return}
+    var rate=rateFor(v);get.textContent=gbp(v*(1+rate));fr.textContent=gbp(v*rate)+" FREE";cb.textContent="BUY "+gbp(v);
+    cb.href=linkFor("custom",v)||("mailto:gary@premierframing.com?subject=Black%20Friday%20voucher%20"+encodeURIComponent(gbp(v))+"&body="+encodeURIComponent("Hi Gary, I'd like a Black Friday voucher. I'll pay "+gbp(v)+" for "+gbp(v*(1+rate))+" of framing credit."));}
   var soon=document.getElementById("soon");
   function openSoon(){
     var closed=body.className==="closed";

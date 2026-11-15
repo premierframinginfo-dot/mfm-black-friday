@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thank you | MisterFrameMan</title>
+<meta name="description" content="Your MisterFrameMan voucher payment went through.">
+<meta property="og:title" content="Black Friday. 50% extra free. | MisterFrameMan">
+<meta property="og:description" content="Spend £200, receive £300 of conservation framing. Four days only, closes midnight Monday 30 November.">
+<meta property="og:image" content="images/ornate_mouldings.jpg">
+<meta name="robots" content="noindex">
+<link rel="icon" href="images/mfm-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+html,body{margin:0;padding:0}
+body{font-family:Poppins,Helvetica,Arial,sans-serif;color:#171717;background:#FFFFFF;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+a{color:#9A7638}a:hover{color:#7d5f2a}
+.hero-bg{background-image:url("images/ornate_mouldings.jpg");background-size:cover;background-position:center}
+.buy{transition:opacity .15s}.buy:hover{opacity:.88;color:#fff}
+a[href^="#choose"]:hover{color:#fff}
+html{scroll-behavior:smooth}
+.tc{position:relative;text-align:center;min-width:0;display:flex;flex-direction:column}
+.tc-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#9A7638;color:#fff;font-size:10px;letter-spacing:2px;padding:4px 12px}
+.tc-top{padding:28px 20px 18px}
+.tc-paylab{display:block;font-size:13px;color:#777}
+.tc-pay{display:block;font-size:30px;font-weight:500;color:#444;margin-top:2px}
+.tc-in{display:flex;align-items:center;justify-content:center;color:#444;border-bottom:2px solid #DFD2B2;width:max-content;margin:2px auto 0;padding:0 6px 2px}
+.tc-in input{width:3ch;border:0;outline:0;background:transparent;font:inherit;color:#171717;text-align:center;padding:0;-moz-appearance:textfield}
+.tc-rule{height:1px;background:#DFD2B2;margin:0 20px}
+.tc-get{padding:18px 20px 8px}
+.tc-getlab{display:block;font-size:11px;letter-spacing:2px;color:#9A7638}
+.tc-getamt{display:block;font-size:46px;line-height:1.05;font-weight:700;color:#171717;margin-top:4px}
+.tc-free{display:inline-block;align-self:center;margin:8px 0 22px;background:#F6F1E6;color:#9A7638;font-size:12px;font-weight:600;letter-spacing:1.5px;padding:6px 14px;border-radius:999px}
+.tc-note{display:block;font-size:11px;color:#8a8478;margin:-14px 20px 18px;line-height:1.4}
+.tc-btn{display:block;margin:auto 20px 22px;color:#fff;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:2px;padding:15px 20px;min-height:44px;box-sizing:border-box}
+
+#custom-amt::-webkit-outer-spin-button,#custom-amt::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+body.pre .buy,body.closed .buy{opacity:.7;cursor:help}
+body.pre .buy[title]:hover,body.closed .buy[title]:hover{opacity:.85}
+#talk{position:fixed;inset:0;background:rgba(10,10,10,.82);display:none;align-items:center;justify-content:center;padding:24px;z-index:50}
+#talk.on{display:flex}
+#talk .box{background:#171717;border:1px solid #9A7638;padding:36px 28px 28px;max-width:400px;width:100%;text-align:center;color:#fff;position:relative}
+#talk .x{position:absolute;top:10px;right:14px;background:none;border:0;color:#C4A468;font-size:26px;line-height:1;cursor:pointer}
+#talk .x:focus{outline:none}#talk .x:focus-visible{outline:1px solid #9A7638;outline-offset:2px}
+#talk .eyebrow{margin:0 0 10px;font-size:11px;letter-spacing:4px;color:#C4A468}
+#talk h3{margin:0 0 22px;font-size:20px;line-height:1.3;font-weight:600}
+#talk .opt{display:flex;justify-content:space-between;align-items:center;gap:16px;border:1px solid #3a3a3a;padding:14px 18px;margin-top:10px;color:#fff;text-decoration:none;text-align:left}
+#talk .opt:hover{border-color:#9A7638;color:#fff}
+#talk .opt b{font-size:14px;font-weight:600;letter-spacing:1px}
+#talk .opt span{font-size:13px;color:#C4A468}
+.talk{cursor:pointer}
+#soon{position:fixed;inset:0;background:rgba(10,10,10,.82);display:none;align-items:center;justify-content:center;padding:24px;z-index:50}
+#soon.on{display:flex}
+#soon .box{background:#171717;border:1px solid #9A7638;padding:36px 28px 32px;max-width:460px;width:100%;text-align:center;color:#fff;position:relative}
+#soon .x{position:absolute;top:10px;right:14px;background:none;border:0;color:#C4A468;font-size:26px;line-height:1;cursor:pointer}
+#soon .eyebrow{margin:0 0 10px;font-size:11px;letter-spacing:4px;color:#C4A468}
+#soon h3{margin:0 0 12px;font-size:24px;line-height:1.25;font-weight:600}
+#soon p{margin:0;font-size:14px;line-height:1.6;color:#DFD2B2}
+#soon .cd{display:flex;gap:10px;justify-content:center;align-items:flex-end;margin:20px 0 4px}
+#soon .cd b{display:block;font-size:34px;line-height:1;font-weight:600}
+#soon .cd small{display:block;font-size:9px;letter-spacing:2px;color:#9A9A9A;margin-top:4px}
+#soon .cd i{font-style:normal;color:#9A7638;font-size:26px;line-height:1.3}
+#soon .go{display:inline-block;margin-top:20px;background:#9A7638;color:#fff;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:2px;padding:14px 26px}
+#soon .x:focus{outline:none}#soon .x:focus-visible{outline:1px solid #9A7638;outline-offset:2px}
+#state-note{display:none;margin:0;padding:12px 24px 0;text-align:center;font-size:14px;font-weight:600;color:#9A7638}
+body.pre #state-note,body.closed #state-note{display:block}
+@media (max-width:600px){h1{font-size:38px !important;letter-spacing:2px !important}#cd-d,#cd-h,#cd-m,#cd-s{font-size:32px !important}}
+</style>
+</head>
+<body>
+<header style="background: #171717; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+  <a href="index.html"><img src="images/mfm-logo.png" alt="MisterFrameMan" style="height: 34px; display: block"></a>
+  <p style="margin: 0; font-size: 13px; color: #FFFFFF"><a href="#contact" class="talk" style="color: inherit; text-decoration: none">Call or WhatsApp <span style="color: #C4A468; font-weight: 600">0800 0141007</span></a></p>
+</header>
+<main style="max-width: 680px; margin: 0 auto; padding: 72px 24px 80px; text-align: center">
+  <p style="margin: 0 0 14px; font-size: 12px; letter-spacing: 4px; color: #9A7638">PAYMENT RECEIVED</p>
+  <h1 style="margin: 0 0 18px; font-size: 40px; line-height: 1.15; font-weight: 600; color: #171717">Thank you. That's done.</h1>
+  <p style="margin: 0 0 14px; font-size: 17px; line-height: 1.6; color: #444">Your payment has gone through. Stripe is emailing you a receipt now, and Gary will email your confirmation with the credit on your account, ready to use from 31 January 2027.</p>
+  <p style="margin: 0 0 36px; font-size: 15px; line-height: 1.6; color: #666">If you told us it's a gift, he'll be in touch about the note. Questions in the meantime? Email <a href="mailto:gary@premierframing.com" style="color: #9A7638">gary@premierframing.com</a> or call or WhatsApp 0800 0141007.</p>
+  <div style="background: #171717; border: 1px solid #9A7638; padding: 28px 24px; text-align: left; display: grid; gap: 14px">
+    <p style="margin: 0; font-size: 11px; letter-spacing: 3px; color: #C4A468">WHAT HAPPENS NEXT</p>
+    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #FFFFFF"><strong style="color: #DFD2B2">1.</strong> Gary emails your confirmation, usually within one working day.</p>
+    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #FFFFFF"><strong style="color: #DFD2B2">2.</strong> From 31 January 2027, get in contact and mention you have a voucher. We take care of the rest.</p>
+    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #FFFFFF"><strong style="color: #DFD2B2">3.</strong> London collections every week, road trips across the UK, or bring it to us in Norwich. Use it across as many pieces as you like.</p>
+  </div>
+  <p style="margin: 36px 0 0"><a href="https://misterframeman.co.uk" style="color: #9A7638; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid #9A7638; padding-bottom: 2px">Back to misterframeman.co.uk</a></p>
+</main>
+<footer style="background: #171717; padding: 28px 24px; text-align: center">
+  <p style="margin: 0; font-size: 11px; line-height: 1.6; color: #9A9A9A">MisterFrameMan · Premier Framing Ltd · 50-56 Pitt Street, Norwich NR3 1DF</p>
+</footer>
+</body>
+</html>
