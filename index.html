@@ -320,7 +320,7 @@ body.pre #state-note,body.closed #state-note{display:block}
   }
   var inp=document.getElementById("custom-amt"),get=document.getElementById("custom-get"),fr=document.getElementById("custom-free"),cb=document.getElementById("custom-buy");
   function custom(){var v=parseFloat(inp.value);var r=currentRow();
-    if(!(v>0)){get.textContent="+"+pct(r.rate);fr.textContent="TYPE AN AMOUNT";cb.textContent="CHOOSE AMOUNT";cb.href=LINKS.custom||"mailto:gary@premierframing.com?subject=Black%20Friday%20voucher";return}
+    if(!(v>0)){get.textContent=r.min!=null?("+"+pct(r.below)+" / +"+pct(r.rate)):("+"+pct(r.rate));if(r.min!=null){get.style.fontSize="30px"}else{get.style.fontSize=""}fr.textContent=r.min!=null?("50% FROM "+gbp(r.min).replace("£","£")):"TYPE AN AMOUNT";cb.textContent="CHOOSE AMOUNT";cb.href=LINKS.custom||"mailto:gary@premierframing.com?subject=Black%20Friday%20voucher";return}
     var rate=rateFor(v);get.textContent=gbp(v*(1+rate));fr.textContent=gbp(v*rate)+" FREE";cb.textContent="BUY "+gbp(v);
     cb.href=linkFor("custom",v)||("mailto:gary@premierframing.com?subject=Black%20Friday%20voucher%20"+encodeURIComponent(gbp(v))+"&body="+encodeURIComponent("Hi Gary, I'd like a Black Friday voucher. I'll pay "+gbp(v)+" for "+gbp(v*(1+rate))+" of framing credit."));}
   var soon=document.getElementById("soon");
