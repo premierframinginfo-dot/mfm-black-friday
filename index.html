@@ -66,6 +66,14 @@ body.pre .buy[title]:hover,body.closed .buy[title]:hover{opacity:.85}
 #soon .cd i{font-style:normal;color:#9A7638;font-size:26px;line-height:1.3}
 #soon .go{display:inline-block;margin-top:20px;background:#9A7638;color:#fff;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:2px;padding:14px 26px}
 #soon .x:focus{outline:none}#soon .x:focus-visible{outline:1px solid #9A7638;outline-offset:2px}
+body.closed #secure-line,body.closed #choose-grid,body.closed #rate-now,body.closed #ends-line,body.closed #cd-wrap,body.closed #hero-cta,body.closed #choose-intro{display:none !important}
+body.closed #closed-panel{display:block}
+#closed-panel{display:none;max-width:720px;margin:0 auto;padding:18px 24px 8px;text-align:center}
+#closed-panel .box{background:#171717;color:#fff;padding:36px 28px;border:1px solid #9A7638}
+#closed-panel .eyebrow{margin:0 0 12px;font-size:11px;letter-spacing:4px;color:#C4A468}
+#closed-panel h3{margin:0 0 14px;font-size:24px;line-height:1.25;font-weight:600}
+#closed-panel p{margin:0 0 12px;font-size:15px;line-height:1.7;color:#DFD2B2}
+#closed-panel .go{display:inline-block;margin-top:10px;background:#9A7638;color:#fff;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:2px;padding:14px 26px}
 #state-note{display:none;margin:0;padding:12px 24px 0;text-align:center;font-size:14px;font-weight:600;color:#9A7638}
 body.pre #state-note,body.closed #state-note{display:block}
 @media (max-width:600px){h1{font-size:38px !important;letter-spacing:2px !important}#cd-d,#cd-h,#cd-m,#cd-s{font-size:32px !important}}
@@ -85,7 +93,7 @@ body.pre #state-note,body.closed #state-note{display:block}
     <h1 style="position: relative; margin: 0; font-size: 56px; line-height: 1.05; font-weight: 600; letter-spacing: 3px; color: #FFFFFF; max-width: 860px">BLACK FRIDAY<br><span id="hero-rate" style="font-weight: 400">50% EXTRA FREE</span></h1>
     <p style="position: relative; margin: 0; font-size: 20px; line-height: 1.6; font-weight: 500; color: #FFFFFF; text-shadow: 0 1px 10px rgba(0,0,0,0.7); max-width: 720px" id="hero-ex">Buy a MisterFrameMan voucher and receive 50% extra free.<br>For example: spend £200 and receive framing credit for £300.</p>
     <p id="cd-label" style="position: relative; margin: 14px 0 0; font-size: 18px; font-weight: 700; letter-spacing: 5px; color: #DFD2B2">CLOSES IN</p>
-    <div style="position: relative; display: flex; gap: 10px; align-items: flex-end; margin-top: 10px">
+    <div id="cd-wrap" style="position: relative; display: flex; gap: 10px; align-items: flex-end; margin-top: 10px">
       <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><span id="cd-d" style="font-size: 40px; line-height: 1; font-weight: 600; color: #FFFFFF">03</span><span style="font-size: 10px; letter-spacing: 2px; color: #9A9A9A">DAYS</span></div>
       <span style="font-size: 30px; line-height: 1.3; color: #9A7638">:</span>
       <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><span id="cd-h" style="font-size: 40px; line-height: 1; font-weight: 600; color: #FFFFFF">18</span><span style="font-size: 10px; letter-spacing: 2px; color: #9A9A9A">HOURS</span></div>
@@ -94,16 +102,25 @@ body.pre #state-note,body.closed #state-note{display:block}
       <span style="font-size: 30px; line-height: 1.3; color: #9A7638">:</span>
       <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><span id="cd-s" style="font-size: 40px; line-height: 1; font-weight: 600; color: #FFFFFF">00</span><span style="font-size: 10px; letter-spacing: 2px; color: #9A9A9A">SECONDS</span></div>
     </div>
-    <a href="#choose" style="position: relative; display: inline-block; background: #9A7638; color: #FFFFFF; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 2px; padding: 18px 44px; min-height: 44px; box-sizing: border-box; margin-top: 6px">CHOOSE YOUR VOUCHER</a>
+    <a id="hero-cta" href="#choose" style="position: relative; display: inline-block; background: #9A7638; color: #FFFFFF; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 2px; padding: 18px 44px; min-height: 44px; box-sizing: border-box; margin-top: 6px">CHOOSE YOUR VOUCHER</a>
   </section>
 
   <section id="choose" style="padding: 72px 24px 24px 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
     <h2 id="choose-h" style="margin: 0; font-size: 30px; line-height: 1.2; font-weight: 600; color: #9A7638">Buy a Voucher &amp; Receive 50% Extra Free</h2>
-    <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #444; max-width: 620px">Pick an amount, or choose your own. There's no minimum and no maximum. Your confirmation arrives by email: Gary confirms the credit on your account, ready to use from 31 January 2027.</p>
+    <p id="choose-intro" style="margin: 0; font-size: 16px; line-height: 1.6; color: #444; max-width: 620px">Pick an amount, or choose your own. There's no minimum and no maximum. Your confirmation arrives by email: Gary confirms the credit on your account, ready to use from 31 January 2027.</p>
     <p id="rate-now" style="margin: 6px 0 0; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #9A7638"></p>
+    <div id="closed-panel">
+      <div class="box">
+        <p class="eyebrow">CLOSED AT MIDNIGHT, MONDAY 30 NOVEMBER</p>
+        <h3>That's it for this year. Thank you.</h3>
+        <p>To everyone who bought a voucher: your confirmation is on its way from Gary, and your credit is ready to use from 31 January 2027. Get in contact then and mention you have a voucher; we take care of the rest.</p>
+        <p>Missed it? We won't be reopening it, as promised. But the workshop is open as ever, and there is still time to have a piece framed before Christmas. Gary is a message away.</p>
+        <a class="go talk" href="#contact">TALK TO GARY ABOUT FRAMING</a>
+      </div>
+    </div>
   </section>
 
-  <section style="padding: 24px 24px 16px 24px; max-width: 1100px; width: 100%; box-sizing: border-box; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px">
+  <section id="choose-grid" style="padding: 24px 24px 16px 24px; max-width: 1100px; width: 100%; box-sizing: border-box; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px">
     <div class="tc" style="border: 1px solid #DFD2B2">
       <div class="tc-top"><span class="tc-paylab">You pay</span><span class="tc-pay">£200</span></div>
       <div class="tc-rule"></div>
@@ -135,7 +152,7 @@ body.pre #state-note,body.closed #state-note{display:block}
       <span class="tc-note">You'll type the same amount again on the payment page.</span>
     </div>
   </section>
-  <p style="margin: 0; padding: 8px 24px 0 24px; text-align: center; font-size: 13px; color: #666">Secure checkout with card, Apple Pay or Google Pay. Prefer to talk to a human? <a href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher">Email Gary</a> <a href="#contact" class="talk">call or WhatsApp</a> and he'll sort it.</p>
+  <p id="secure-line" style="margin: 0; padding: 8px 24px 0 24px; text-align: center; font-size: 13px; color: #666">Secure checkout with card, Apple Pay or Google Pay. Prefer to talk to a human? <a href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher">Email Gary</a> <a href="#contact" class="talk">call or WhatsApp</a> and he'll sort it.</p>
   <p style="margin: 0; padding: 10px 24px 0 24px; text-align: center; font-size: 12px; color: #9A7638; letter-spacing: 1px" id="ends-line">Closes at midnight on Monday 30 November. We won't be extending it.</p>
 
   <section style="margin-top: 72px; background: #171717; padding: 64px 24px; display: flex; flex-direction: column; align-items: center; gap: 36px">
@@ -297,7 +314,9 @@ body.pre #state-note,body.closed #state-note{display:block}
     document.querySelectorAll("[data-get]").forEach(function(el){var a=+el.getAttribute("data-get");el.textContent=gbp(a*(1+rateFor(a)))});
     document.querySelectorAll("[data-free]").forEach(function(el){var a=+el.getAttribute("data-free");el.textContent=gbp(a*rateFor(a))+" FREE"});
     document.querySelectorAll(".buy[data-amount]").forEach(function(a){var k=a.getAttribute("data-amount");if(k==="custom")return;var u=linkFor(k,+k);a.href=u||("mailto:gary@premierframing.com?subject=Black%20Friday%20voucher%20("+k+")")});
-    var r=currentRow();headline(r);var el=document.getElementById("ends-line");if(el){var nr=nextRow();var endT=nr?nr.t:CLOSE;var e=new Date(endT),names=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],mid=e.getHours()===0&&e.getMinutes()===0,d=mid?new Date(endT-60000):e,tm=mid||(e.getHours()===23&&e.getMinutes()===59)?"midnight":(e.getHours()%12||12)+(e.getHours()>=12?"pm":"am");el.textContent=(nr?"These rates end at "+tm+" on ":"Closes at "+tm+" on ")+names[d.getDay()]+" "+d.getDate()+" November."+(nr?"":" We won't be extending it.")}
+    var r=currentRow();headline(r);
+    if(body.className==="closed"){document.getElementById("hero-rate").textContent="HAS CLOSED";document.getElementById("hero-ex").innerHTML="Thank you to everyone who bought a voucher. Your credit is ready to use from 31 January 2027.<br>Missed it? The workshop is open as ever: call or WhatsApp 0800 0141007.";document.getElementById("choose-h").textContent="Black Friday 2026 has closed";var eb=document.getElementById("hero-eyebrow");if(eb)eb.textContent="BLACK FRIDAY · CLOSED";}
+    var el=document.getElementById("ends-line");if(el){var nr=nextRow();var endT=nr?nr.t:CLOSE;var e=new Date(endT),names=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],mid=e.getHours()===0&&e.getMinutes()===0,d=mid?new Date(endT-60000):e,tm=mid||(e.getHours()===23&&e.getMinutes()===59)?"midnight":(e.getHours()%12||12)+(e.getHours()>=12?"pm":"am");el.textContent=(nr?"These rates end at "+tm+" on ":"Closes at "+tm+" on ")+names[d.getDay()]+" "+d.getDate()+" November."+(nr?"":" We won't be extending it.")}
     var tag=document.getElementById("rate-now");if(tag){var nx=nextRow(),when=nx&&r.vip&&Date.now()>=OPEN?(" · changes "+["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(nx.t).getDay()]+" "+(new Date(nx.t).getHours()===0?"midnight":new Date(nx.t).getHours()+":00")):"";tag.textContent=(r.min!=null?(pct(r.rate)+" extra on £"+r.min.toLocaleString("en-GB")+" and above, "+pct(r.below)+" below"):(pct(r.rate)+" extra free on any amount"))+when}
   }
   var body=document.body, note=document.getElementById("state-note");
@@ -308,7 +327,7 @@ body.pre #state-note,body.closed #state-note{display:block}
     var now=Date.now(), target, label;
     if(now<OPEN){body.className="pre";target=OPEN;label="OPENS IN";note.textContent=isVip?"Your early access opens at 9am on Monday 23 November.":"Opens at 5pm on Thursday 26 November. The buttons go live then.";}
     else if(now<CLOSE){body.className="";target=CLOSE;label="CLOSES IN";}
-    else{body.className="closed";target=now;label="CLOSED";note.textContent="This year's voucher has now closed. Thank you to everyone who bought one.";}
+    else{body.className="closed";target=now;label="CLOSED";note.textContent="";}
     var t=Math.max(0,target-now);
     document.getElementById("cd-label").textContent=label;
     refreshCards();
@@ -345,7 +364,7 @@ body.pre #state-note,body.closed #state-note{display:block}
   setInterval(titles,1000);titles();
   function fit(){var n=(inp.value||"").length;inp.style.width=Math.max(3,n*0.95+0.3)+"ch"}
   inp.addEventListener("input",function(){fit();custom()});fit();cb.addEventListener("click",function(e){if(!(parseFloat(inp.value)>0)){e.preventDefault();inp.focus();}});
-  tick();setInterval(tick,1000);
+  custom();tick();setInterval(tick,1000);
 })();
 </script>
 </body>
