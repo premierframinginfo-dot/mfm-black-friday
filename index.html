@@ -136,7 +136,7 @@ body.pre #state-note,body.closed #state-note{display:block}
     </div>
   </section>
   <p style="margin: 0; padding: 8px 24px 0 24px; text-align: center; font-size: 13px; color: #666">Secure checkout with card, Apple Pay or Google Pay. Prefer to talk to a human? <a href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher">Email Gary</a> <a href="#contact" class="talk">call or WhatsApp</a> and he'll sort it.</p>
-  <p style="margin: 0; padding: 10px 24px 0 24px; text-align: center; font-size: 12px; color: #9A7638; letter-spacing: 1px">Closes at midnight on Monday 30 November. We won't be extending it.</p>
+  <p style="margin: 0; padding: 10px 24px 0 24px; text-align: center; font-size: 12px; color: #9A7638; letter-spacing: 1px" id="ends-line">Closes at midnight on Monday 30 November. We won't be extending it.</p>
 
   <section style="margin-top: 72px; background: #171717; padding: 64px 24px; display: flex; flex-direction: column; align-items: center; gap: 36px">
     <h2 style="margin: 0; font-size: 13px; letter-spacing: 4px; font-weight: 600; color: #C4A468; text-align: center">HOW IT WORKS</h2>
@@ -297,7 +297,8 @@ body.pre #state-note,body.closed #state-note{display:block}
     document.querySelectorAll("[data-get]").forEach(function(el){var a=+el.getAttribute("data-get");el.textContent=gbp(a*(1+rateFor(a)))});
     document.querySelectorAll("[data-free]").forEach(function(el){var a=+el.getAttribute("data-free");el.textContent=gbp(a*rateFor(a))+" FREE"});
     document.querySelectorAll(".buy[data-amount]").forEach(function(a){var k=a.getAttribute("data-amount");if(k==="custom")return;var u=linkFor(k,+k);a.href=u||("mailto:gary@premierframing.com?subject=Black%20Friday%20voucher%20("+k+")")});
-    var r=currentRow();headline(r);var tag=document.getElementById("rate-now");if(tag){var nx=nextRow(),when=nx&&r.vip&&Date.now()>=OPEN?(" · changes "+["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(nx.t).getDay()]+" "+(new Date(nx.t).getHours()===0?"midnight":new Date(nx.t).getHours()+":00")):"";tag.textContent=(r.min!=null?(pct(r.rate)+" extra on £"+r.min.toLocaleString("en-GB")+" and above, "+pct(r.below)+" below"):(pct(r.rate)+" extra free on any amount"))+when}
+    var r=currentRow();headline(r);var el=document.getElementById("ends-line");if(el){var nr=nextRow();var endT=nr?nr.t:CLOSE;var d=new Date(endT-60000);var names=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];el.textContent=(nr?"These rates end at midnight on ":"Closes at midnight on ")+names[d.getDay()]+" "+d.getDate()+" November."+(nr?"":" We won't be extending it.")}
+    var tag=document.getElementById("rate-now");if(tag){var nx=nextRow(),when=nx&&r.vip&&Date.now()>=OPEN?(" · changes "+["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(nx.t).getDay()]+" "+(new Date(nx.t).getHours()===0?"midnight":new Date(nx.t).getHours()+":00")):"";tag.textContent=(r.min!=null?(pct(r.rate)+" extra on £"+r.min.toLocaleString("en-GB")+" and above, "+pct(r.below)+" below"):(pct(r.rate)+" extra free on any amount"))+when}
   }
   var body=document.body, note=document.getElementById("state-note");
   if(!note){note=document.createElement("p");note.id="state-note";var ch=document.getElementById("choose");ch.parentNode.insertBefore(note,ch.nextSibling);}
