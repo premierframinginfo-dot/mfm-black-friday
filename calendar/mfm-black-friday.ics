@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//MisterFrameMan//Black Friday 2026//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:mfm-black-friday-2026-open@misterframeman.co.uk
+DTSTAMP:20261115T200000Z
+DTSTART:20261126T170000Z
+DTEND:20261126T173000Z
+SUMMARY:MisterFrameMan Black Friday: 30% extra free opens
+DESCRIPTION:Buy a MisterFrameMan framing voucher and receive 30% extra free. Opens 5pm Thursday\, closes midnight Sunday 29 November.\nhttps://premierframinginfo-dot.github.io/mfm-black-friday/
+URL:https://premierframinginfo-dot.github.io/mfm-black-friday/
+LOCATION:https://premierframinginfo-dot.github.io/mfm-black-friday/
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:MisterFrameMan Black Friday opens in 15 minutes
+END:VALARM
+END:VEVENT
+END:VCALENDAR

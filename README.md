@@ -5,16 +5,17 @@ Static page, no build. Pushing to `main` publishes it on GitHub Pages within abo
 - `index.html`: the page. Everything that changes with the offer is at the top of its `<script>`: `SCHEDULE`, `CLOSE` and `LINKS`.
 - `thanks.html`: where Stripe sends people after paying.
 - `images/options/`: the day-by-day pictures sent to Gary.
+- `calendar/mfm-black-friday.ics`: the "add to calendar" file linked from the heads-up email.
 
 ## Changing the offer
 
 Edit `SCHEDULE` in `index.html`. Each row is when a rate starts (UK time), the extra as a fraction, and optionally a threshold (`min`, with `below` for amounts under it). The page recalculates every card, the any-amount box, the gold line under the heading and the Stripe reference on every button.
 
-Option 1 as chosen (VIP 50%, public 30% with 35% over £500, Cyber Monday 45% for non-buyers):
+Option 1 as chosen (VIP 50%, public 30%, Cyber Monday 45% for non-buyers). Add `min:500, rate:0.35, below:0.3` to the middle row if Gary wants a higher rate over £500:
 ```
 var SCHEDULE=[
   {start:"2026-11-23T09:00:00+00:00", rate:0.5, vip:true},                // VIP window: only ?vip=early sees it
-  {start:"2026-11-26T17:00:00+00:00", rate:0.35, min:500, below:0.3},
+  {start:"2026-11-26T17:00:00+00:00", rate:0.3},
   {start:"2026-11-30T00:00:00+00:00", rate:0.45}
 ];
 ```
