@@ -322,7 +322,7 @@ body.pre #state-note,body.closed #state-note{display:block}
   document.querySelectorAll(".talk").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();talk.classList.add("on");talk.querySelector(".x").focus();});});
   talk.querySelector(".x").addEventListener("click",function(){talk.classList.remove("on")});talk.addEventListener("click",function(e){if(e.target===talk)talk.classList.remove("on")});
   document.querySelectorAll(".buy").forEach(function(a){a.addEventListener("click",function(e){if(body.className==="pre"||body.className==="closed"){e.preventDefault();e.stopImmediatePropagation();openSoon();return;}
-    var k=a.getAttribute("data-amount"),amt=k==="custom"?parseFloat(inp.value):+k;if(amt>0){var rate=rateFor(amt);try{localStorage.setItem("mfm_bf26",JSON.stringify({pay:amt,get:Math.round(amt*(1+rate)),rate:rate,at:Date.now()}))}catch(err){}}},true);});
+    var k=a.getAttribute("data-amount"),amt=k==="custom"?parseFloat(inp.value):+k;if(amt>0){var rate=rateFor(amt);try{localStorage.setItem("mfm_bf26",JSON.stringify({custom:k==="custom",pay:amt,get:Math.round(amt*(1+rate)),rate:rate,row:currentRow(),at:Date.now()}))}catch(err){}}},true);});
   soon.querySelector(".x").addEventListener("click",closeSoon);soon.addEventListener("click",function(e){if(e.target===soon)closeSoon()});document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeSoon();talk.classList.remove("on");}});
   function titles(){var t=body.className==="pre"?"Opens Thursday 26 November at 5pm":body.className==="closed"?"Closed at midnight on Monday 30 November":"";document.querySelectorAll(".buy").forEach(function(a){if(t)a.setAttribute("title",t);else a.removeAttribute("title")});}
   setInterval(titles,1000);titles();
