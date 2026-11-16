@@ -11,12 +11,12 @@ Static page, no build. Pushing to `main` publishes it on GitHub Pages within abo
 
 Edit `SCHEDULE` in `index.html`. Each row is when a rate starts (UK time), the extra as a fraction, and optionally a threshold (`min`, with `below` for amounts under it). The page recalculates every card, the any-amount box, the gold line under the heading and the Stripe reference on every button.
 
-Option 1 as chosen (VIP 50%, public 30%, Cyber Monday 45% for non-buyers). Add `min:500, rate:0.35, below:0.3` to the middle row if Gary wants a higher rate over £500:
+Option 1 as chosen (VIP 50%, public 30%, Cyber Monday 50% for non-buyers). Add `min:500, rate:0.35, below:0.3` to the middle row if Gary wants a higher rate over £500:
 ```
 var SCHEDULE=[
   {start:"2026-11-23T09:00:00+00:00", rate:0.5, vip:true},                // VIP window: only ?vip=early sees it
   {start:"2026-11-26T17:00:00+00:00", rate:0.3},
-  {start:"2026-11-30T00:00:00+00:00", rate:0.45}
+  {start:"2026-11-30T00:00:00+00:00", rate:0.5}
 ];
 ```
 Every email's `<head>` needs `<meta name="color-scheme" content="light only">` and `<meta name="supported-color-schemes" content="light">` so the Gmail app does not flip the dark design (tested 15 Nov 2026).
@@ -25,7 +25,7 @@ Option 2 (50% on Black Friday, then 5% a day):
 ```
 var SCHEDULE=[
   {start:"2026-11-26T17:00:00+00:00", rate:0.5},
-  {start:"2026-11-28T00:00:00+00:00", rate:0.45},
+  {start:"2026-11-28T00:00:00+00:00", rate:0.5},
   {start:"2026-11-29T00:00:00+00:00", rate:0.40},
   {start:"2026-11-30T00:00:00+00:00", rate:0.35}
 ];
@@ -37,12 +37,12 @@ var SCHEDULE=[
   {start:"2026-11-30T00:00:00+00:00", rate:0.5, min:500, below:0.3}
 ];
 ```
-Option 4 (VIP 50%, public 30%, Monday 45%):
+Option 4 (VIP 50%, public 30%, Monday 50%):
 ```
 var SCHEDULE=[
   {start:"2026-11-23T09:00:00+00:00", rate:0.5},
   {start:"2026-11-26T17:00:00+00:00", rate:0.3},
-  {start:"2026-11-30T00:00:00+00:00", rate:0.45}
+  {start:"2026-11-30T00:00:00+00:00", rate:0.5}
 ];
 ```
 Option 5 (one 50%, Thursday to Monday): the current setting.
