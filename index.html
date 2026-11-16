@@ -284,12 +284,8 @@ body.pre #state-note,body.closed #state-note{display:block}
     {start:"2026-11-30T00:00:00+00:00", rate:0.45}                        /* Cyber Monday: 45% any amount, emailed to non-buyers */
   ];
   var CLOSE=new Date("2026-11-30T23:59:00+00:00").getTime();
-  var LINKS={ /* Stripe Payment Links. TEST links for now; swap for live ones when Stripe is verified. */
-    "200":"https://buy.stripe.com/test_28E9ATdxefZz2Wz8zJ1Jm00",
-    "500":"https://buy.stripe.com/test_28E5kD1OwdRrdBdg2b1Jm01",
-    "1000":"https://buy.stripe.com/test_6oU28r1OweVveFh2bl1Jm02",
-    "custom":"https://buy.stripe.com/test_28EeVd3WE6oZfJlcPZ1Jm03"
-  };
+  var LINKS={ /* LIVE Stripe Payment Links, Premier Framing account, made 16 Nov 2026 */
+  "200":"https://buy.stripe.com/aFa4gz3Xz6sP1UT86B6kg04","500":"https://buy.stripe.com/7sYcN53Xz18v6b9aeJ6kg05","1000":"https://buy.stripe.com/3cI14nbq14kH43186B6kg06","custom":"https://buy.stripe.com/fZu6oH8dPeZl0QPaeJ6kg07"};
   var VIP_KEY="early"; /* VIP email links point at ?vip=early */
   var isVip=false;try{var q=new URLSearchParams(location.search).get("vip");if(q===VIP_KEY){localStorage.setItem("mfm_vip","1")}isVip=localStorage.getItem("mfm_vip")==="1"}catch(e){isVip=/[?&]vip=early/.test(location.search)}
   SCHEDULE.forEach(function(r){r.t=new Date(r.start).getTime()});
