@@ -178,7 +178,7 @@ body.pre #state-note,body.closed #state-note{display:block}
 
   <section style="padding: 80px 24px 24px 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
     <h2 style="margin: 0; font-size: 30px; line-height: 1.2; font-weight: 600; color: #171717">The extras you usually talk yourself out of.</h2>
-    <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #555; max-width: 680px">With half as much again to spend, the museum glass stops being the extra and becomes the obvious choice. This is the year to do it properly.</p>
+    <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #555; max-width: 680px">With extra credit to spend, the museum glass stops being the extra and becomes the obvious choice.</p>
   </section>
   <section style="padding: 24px 24px 0 24px; max-width: 1100px; width: 100%; box-sizing: border-box; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
     <div style="display: flex; flex-direction: column; gap: 12px; min-width: 0; border: 1px solid #DFD2B2">
@@ -227,7 +227,7 @@ body.pre #state-note,body.closed #state-note{display:block}
     <div style="flex: 1 1 320px; min-width: 0; background: #171717; padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; gap: 14px">
       <p style="margin: 0; font-size: 11px; letter-spacing: 3px; color: #C4A468">THE PERFECT CHRISTMAS PRESENT</p>
       <h2 style="margin: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: #FFFFFF">For the collector who has everything… except a frame for it.</h2>
-      <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #BBBBBB">Picture them opening it on Christmas morning. Then picture the piece on their wall in February, done properly, with half as much again to spend. We'll send the voucher to them with your note, or to you to hand over yourself.</p>
+      <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #BBBBBB">Picture them opening it on Christmas morning. Then picture the piece on their wall in February. We'll send the voucher to them with your note, or to you to hand over yourself.</p>
     </div>
     <img src="images/queen.jpg" alt="Portrait of the Queen in a gold frame on a dark wall" style="flex: 1 1 320px; min-width: 0; width: 100%; max-width: 520px; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 30%; display: block">
   </section>
@@ -279,8 +279,9 @@ body.pre #state-note,body.closed #state-note{display:block}
      CLOSE is when everything ends. Examples for the five options are in README.md. */
   var SCHEDULE=[
     {start:"2026-11-23T09:00:00+00:00", rate:0.5, vip:true},              /* VIP window: only people who arrive with ?vip=early see it */
-    {start:"2026-11-26T17:00:00+00:00", rate:0.3},                        /* public: 30% any amount (higher rate over £500 TBC with Gary) */
-    {start:"2026-11-30T00:00:00+00:00", rate:0.5}                        /* Cyber Monday: 50% any amount, emailed to non-buyers */
+    {start:"2026-11-26T00:00:00+00:00", gap:true, vip:true},             /* VIP window closes at midnight Wednesday; closed until 5pm Thursday */
+    {start:"2026-11-26T17:00:00+00:00", rate:0.3},                        /* public: 30% any amount, Thursday 5pm to Sunday midnight */
+    {start:"2026-11-30T00:00:00+00:00", rate:0.5, label:"CYBER MONDAY · TODAY ONLY"} /* Cyber Monday: 50% any amount, 24 hours */
   ];
   var CLOSE=new Date("2026-11-30T23:59:00+00:00").getTime();
   var LINKS={ /* LIVE Stripe Payment Links, Premier Framing account, made 16 Nov 2026 */
@@ -294,7 +295,9 @@ body.pre #state-note,body.closed #state-note{display:block}
   SCHEDULE.forEach(function(r){r.t=new Date(r.start).getTime()});
   var visible=SCHEDULE.filter(function(r){return isVip||!r.vip});
   var OPEN=visible[0].t;
-  function currentRow(){var now=NOW(),row=visible[0];visible.forEach(function(r){if(now>=r.t)row=r});return row}
+  function rawRow(){var now=NOW(),row=visible[0];visible.forEach(function(r){if(now>=r.t)row=r});return row}
+  function inGap(){var r=rawRow();return !!r.gap&&NOW()>=r.t}
+  function currentRow(){var r=rawRow();if(r.gap){var n=nextRow();return n||r}return r}
   /* before opening, currentRow() is the first visible row, so the cards preview what opens */
   function nextRow(){var now=Math.max(NOW(),OPEN);for(var i=0;i<visible.length;i++){if(visible[i].t>now)return visible[i]}return null}
   function topRate(r){return r.rate}
@@ -304,7 +307,7 @@ body.pre #state-note,body.closed #state-note{display:block}
       :("Buy a MisterFrameMan voucher and receive "+pct(r.rate)+" extra free.<br>For example: spend £500 and receive framing credit for "+gbp(500*(1+r.rate))+".");
     document.getElementById("hero-ex").innerHTML=ex;
     document.getElementById("choose-h").innerHTML="Buy a Voucher &amp; Receive "+pct(topRate(r))+" Extra Free"+(r.min!=null?" on "+gbp(r.min)+"+":"");
-    var eb=document.getElementById("hero-eyebrow");if(eb)eb.textContent=r.vip?"BLACK FRIDAY · VIP EARLY ACCESS":"BLACK FRIDAY · FOUR DAYS ONLY";
+    var eb=document.getElementById("hero-eyebrow");if(eb)eb.textContent=r.label?r.label:(r.vip?"BLACK FRIDAY · VIP EARLY ACCESS":"BLACK FRIDAY · FOUR DAYS ONLY");
   }
   function rateFor(amount){var r=currentRow();if(r.min!=null&&amount<r.min)return r.below;return r.rate}
   function pct(x){return Math.round(x*100)+"%"}
@@ -315,8 +318,8 @@ body.pre #state-note,body.closed #state-note{display:block}
     document.querySelectorAll(".buy[data-amount]").forEach(function(a){var k=a.getAttribute("data-amount");if(k==="custom")return;var u=linkFor(k,+k);a.href=u||("mailto:gary@premierframing.com?subject=Black%20Friday%20voucher%20("+k+")")});
     var r=currentRow();headline(r);
     if(body.className==="closed"){document.getElementById("hero-rate").textContent="HAS CLOSED";document.getElementById("hero-ex").innerHTML="Thank you to everyone who bought a voucher. Your credit is ready to use from 31 January 2027.<br>Missed it? The workshop is open as ever: call or WhatsApp 0800 0141007.";document.getElementById("choose-h").textContent="Black Friday 2026 has closed";var eb=document.getElementById("hero-eyebrow");if(eb)eb.textContent="BLACK FRIDAY · CLOSED";}
-    var el=document.getElementById("ends-line");if(el){var nr=nextRow();var endT=nr?nr.t:CLOSE;var e=new Date(endT),names=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],mid=e.getHours()===0&&e.getMinutes()===0,d=mid?new Date(endT-60000):e,tm=mid||(e.getHours()===23&&e.getMinutes()===59)?"midnight":(e.getHours()%12||12)+(e.getHours()>=12?"pm":"am");el.textContent=(nr?"These rates end at "+tm+" on ":"Closes at "+tm+" on ")+names[d.getDay()]+" "+d.getDate()+" November."+(nr?"":" We won't be extending it.")}
-    var tag=document.getElementById("rate-now");if(tag){var nx=nextRow(),when=nx&&r.vip&&NOW()>=OPEN?(" · changes "+["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(nx.t).getDay()]+" "+(new Date(nx.t).getHours()===0?"midnight":new Date(nx.t).getHours()+":00")):"";tag.textContent=(r.min!=null?(pct(r.rate)+" extra on £"+r.min.toLocaleString("en-GB")+" and above, "+pct(r.below)+" below"):(pct(r.rate)+" extra free on any amount"))+when}
+    var el=document.getElementById("ends-line");if(el){var cr=currentRow(),nr=visible.filter(function(x){return x.t>cr.t})[0]||null;var endT=nr?nr.t:CLOSE;var e=new Date(endT),names=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],mid=e.getHours()===0&&e.getMinutes()===0,d=mid?new Date(endT-60000):e,tm=mid||(e.getHours()===23&&e.getMinutes()===59)?"midnight":(e.getHours()%12||12)+(e.getHours()>=12?"pm":"am");el.textContent=(nr?"These rates end at "+tm+" on ":"Closes at "+tm+" on ")+names[d.getDay()]+" "+d.getDate()+" November."+(nr?"":" We won't be extending it.")}
+    var tag=document.getElementById("rate-now");if(tag){var nx=nextRow(),when=nx&&r.vip&&NOW()>=OPEN?(new Date(nx.t).getHours()===0?(" · closes "+["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(nx.t-60000).getDay()]+" midnight"):(" · changes "+["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(nx.t).getDay()]+" "+new Date(nx.t).getHours()+":00")):"";tag.textContent=(r.min!=null?(pct(r.rate)+" extra on £"+r.min.toLocaleString("en-GB")+" and above, "+pct(r.below)+" below"):(pct(r.rate)+" extra free on any amount"))+when}
   }
   var body=document.body, note=document.getElementById("state-note");
   if(!note){note=document.createElement("p");note.id="state-note";var ch=document.getElementById("choose");ch.parentNode.insertBefore(note,ch.nextSibling);}
@@ -325,7 +328,8 @@ body.pre #state-note,body.closed #state-note{display:block}
   function tick(){
     var now=NOW(), target, label;
     if(now<OPEN){body.className="pre";target=OPEN;label="OPENS IN";note.textContent=isVip?"Your early access opens at 9am on Monday 23 November.":"Opens at 5pm on Thursday 26 November. The buttons go live then.";}
-    else if(now<CLOSE){body.className="";target=CLOSE;label="CLOSES IN";}
+    else if(inGap()){var nr0=nextRow();body.className="pre";target=nr0?nr0.t:CLOSE;label="OPENS IN";note.textContent="Your VIP access closed at midnight on Wednesday. It opens to everyone at 5pm on Thursday, at 30% extra.";}
+    else if(now<CLOSE){var nr1=nextRow();body.className="";target=nr1?nr1.t:CLOSE;label="CLOSES IN";note.textContent="";}
     else{body.className="closed";target=now;label="CLOSED";note.textContent="";}
     var t=Math.max(0,target-now);
     document.getElementById("cd-label").textContent=label;
@@ -346,8 +350,8 @@ body.pre #state-note,body.closed #state-note{display:block}
   function openSoon(){
     var closed=body.className==="closed";
     document.getElementById("soon-eyebrow").textContent=closed?"CLOSED":"NOT QUITE YET";
-    document.getElementById("soon-h").textContent=closed?"Closed at midnight, Monday 30 November":(isVip?"Your early access opens Monday 23 November, 9am":"Opens Thursday 26 November, 5pm");
-    document.getElementById("soon-p").textContent=closed?"As promised, no extension. For framing at the usual prices, Gary is a message away.":"Four days only, then it closes at midnight on Monday. Gary can hold one for you in the meantime.";
+    document.getElementById("soon-h").textContent=closed?"Closed at midnight, Monday 30 November":((isVip&&!inGap())?"Your early access opens Monday 23 November, 9am":"Opens Thursday 26 November, 5pm");
+    document.getElementById("soon-p").textContent=closed?"As promised, no extension. For framing at the usual prices, Gary is a message away.":((isVip&&!inGap())?"VIP access runs from 9am Monday until midnight on Wednesday. Gary can hold one for you in the meantime.":"Thursday 5pm until midnight on Sunday. Gary can hold one for you in the meantime.");
     document.getElementById("soon-cd").style.display=closed?"none":"flex";
     document.getElementById("soon-go").textContent=closed?"EMAIL GARY":"EMAIL GARY TO RESERVE ONE";
     soon.classList.add("on");soon.querySelector(".x").focus();
@@ -359,7 +363,7 @@ body.pre #state-note,body.closed #state-note{display:block}
   document.querySelectorAll(".buy").forEach(function(a){a.addEventListener("click",function(e){if(body.className==="pre"||body.className==="closed"){e.preventDefault();e.stopImmediatePropagation();openSoon();return;}
     var k=a.getAttribute("data-amount"),amt=k==="custom"?parseFloat(inp.value):+k;if(amt>0){var rate=rateFor(amt);try{localStorage.setItem("mfm_bf26",JSON.stringify({custom:k==="custom",pay:amt,get:Math.round(amt*(1+rate)),rate:rate,row:currentRow(),at:NOW()}))}catch(err){}}},true);});
   soon.querySelector(".x").addEventListener("click",closeSoon);soon.addEventListener("click",function(e){if(e.target===soon)closeSoon()});document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeSoon();talk.classList.remove("on");}});
-  function titles(){var t=body.className==="pre"?(isVip?"Early access opens Monday 23 November at 9am":"Opens Thursday 26 November at 5pm"):body.className==="closed"?"Closed at midnight on Monday 30 November":"";document.querySelectorAll(".buy").forEach(function(a){if(t)a.setAttribute("title",t);else a.removeAttribute("title")});}
+  function titles(){var t=body.className==="pre"?((isVip&&!inGap())?"Early access opens Monday 23 November at 9am":"Opens Thursday 26 November at 5pm"):body.className==="closed"?"Closed at midnight on Monday 30 November":"";document.querySelectorAll(".buy").forEach(function(a){if(t)a.setAttribute("title",t);else a.removeAttribute("title")});}
   setInterval(titles,1000);titles();
   function fit(){var n=(inp.value||"").length;inp.style.width=Math.max(3,n*0.95+0.3)+"ch"}
   inp.addEventListener("input",function(){fit();custom()});fit();cb.addEventListener("click",function(e){if(!(parseFloat(inp.value)>0)){e.preventDefault();inp.focus();}});
