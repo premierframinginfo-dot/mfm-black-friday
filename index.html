@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Black Friday 50% Extra Free | MisterFrameMan</title>
-<meta name="description" content="Buy a MisterFrameMan framing voucher before midnight on Monday 30 November and we add 50% extra, free. Spend £200, receive £300 of museum-standard framing.">
+<meta name="description" content="Buy a MisterFrameMan framing voucher before midnight on Monday 30 November and we add 50% extra, free. Spend £500, receive £750 of museum-standard framing.">
 <meta property="og:title" content="Black Friday. 50% extra free. | MisterFrameMan">
-<meta property="og:description" content="Spend £200, receive £300 of conservation framing. Four days only, closes midnight Monday 30 November.">
+<meta property="og:description" content="Spend £500, receive £750 of conservation framing. Four days only, closes midnight Monday 30 November.">
 <meta property="og:image" content="images/ornate_mouldings.jpg">
 <meta name="robots" content="noindex">
 <link rel="icon" href="images/mfm-logo.png">
@@ -91,7 +91,7 @@ body.pre #state-note,body.closed #state-note{display:block}
     <div style="position: absolute; inset: 0; background: rgba(10,10,10,0.78)"></div>
     <p id="hero-eyebrow" style="position: relative; margin: 0; font-size: 12px; letter-spacing: 4px; color: #C4A468">BLACK FRIDAY · FOUR DAYS ONLY</p>
     <h1 style="position: relative; margin: 0; font-size: 56px; line-height: 1.05; font-weight: 600; letter-spacing: 3px; color: #FFFFFF; max-width: 860px">BLACK FRIDAY<br><span id="hero-rate" style="font-weight: 400">50% EXTRA FREE</span></h1>
-    <p style="position: relative; margin: 0; font-size: 20px; line-height: 1.6; font-weight: 500; color: #FFFFFF; text-shadow: 0 1px 10px rgba(0,0,0,0.7); max-width: 720px" id="hero-ex">Buy a MisterFrameMan voucher and receive 50% extra free.<br>For example: spend £200 and receive framing credit for £300.</p>
+    <p style="position: relative; margin: 0; font-size: 20px; line-height: 1.6; font-weight: 500; color: #FFFFFF; text-shadow: 0 1px 10px rgba(0,0,0,0.7); max-width: 720px" id="hero-ex">Buy a MisterFrameMan voucher and receive 50% extra free.<br>For example: spend £500 and receive framing credit for £750.</p>
     <p id="cd-label" style="position: relative; margin: 14px 0 0; font-size: 18px; font-weight: 700; letter-spacing: 5px; color: #DFD2B2">CLOSES IN</p>
     <div id="cd-wrap" style="position: relative; display: flex; gap: 10px; align-items: flex-end; margin-top: 10px">
       <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><span id="cd-d" style="font-size: 40px; line-height: 1; font-weight: 600; color: #FFFFFF">03</span><span style="font-size: 10px; letter-spacing: 2px; color: #9A9A9A">DAYS</span></div>
@@ -152,7 +152,7 @@ body.pre #state-note,body.closed #state-note{display:block}
       <span class="tc-note">You'll type the same amount again on the payment page.</span>
     </div>
   </section>
-  <p id="secure-line" style="margin: 0; padding: 8px 24px 0 24px; text-align: center; font-size: 13px; color: #666">Secure checkout with card, Apple Pay or Google Pay. Prefer to talk to a human? <a href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher">Email Gary</a> <a href="#contact" class="talk">call or WhatsApp</a> and he'll sort it.</p>
+  <p id="secure-line" style="margin: 0; padding: 8px 24px 0 24px; text-align: center; font-size: 13px; color: #666">Secure checkout with card, Apple Pay or Google Pay. Prefer to talk to a human? <a href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher">Email Gary</a>, <a href="#contact" class="talk">call or WhatsApp</a>.</p>
   <p style="margin: 0; padding: 10px 24px 0 24px; text-align: center; font-size: 12px; color: #9A7638; letter-spacing: 1px" id="ends-line">Closes at midnight on Monday 30 November. We won't be extending it.</p>
 
   <section style="margin-top: 72px; background: #171717; padding: 64px 24px; display: flex; flex-direction: column; align-items: center; gap: 36px">
@@ -297,12 +297,12 @@ body.pre #state-note,body.closed #state-note{display:block}
   var OPEN=visible[0].t;
   function currentRow(){var now=NOW(),row=visible[0];visible.forEach(function(r){if(now>=r.t)row=r});return row}
   /* before opening, currentRow() is the first visible row, so the cards preview what opens */
-  function nextRow(){var now=NOW();for(var i=0;i<visible.length;i++){if(visible[i].t>now)return visible[i]}return null}
+  function nextRow(){var now=Math.max(NOW(),OPEN);for(var i=0;i<visible.length;i++){if(visible[i].t>now)return visible[i]}return null}
   function topRate(r){return r.rate}
   function headline(r){
     document.getElementById("hero-rate").textContent=pct(topRate(r))+" EXTRA FREE";
     var ex=r.min!=null?("Spend "+gbp(r.min)+" or more on a MisterFrameMan voucher and receive "+pct(r.rate)+" extra free. Under "+gbp(r.min)+", "+pct(r.below)+" extra.<br>For example: spend "+gbp(r.min)+" and receive framing credit for "+gbp(r.min*(1+r.rate))+".")
-      :("Buy a MisterFrameMan voucher and receive "+pct(r.rate)+" extra free.<br>For example: spend £200 and receive framing credit for "+gbp(200*(1+r.rate))+".");
+      :("Buy a MisterFrameMan voucher and receive "+pct(r.rate)+" extra free.<br>For example: spend £500 and receive framing credit for "+gbp(500*(1+r.rate))+".");
     document.getElementById("hero-ex").innerHTML=ex;
     document.getElementById("choose-h").innerHTML="Buy a Voucher &amp; Receive "+pct(topRate(r))+" Extra Free"+(r.min!=null?" on "+gbp(r.min)+"+":"");
     var eb=document.getElementById("hero-eyebrow");if(eb)eb.textContent=r.vip?"BLACK FRIDAY · VIP EARLY ACCESS":"BLACK FRIDAY · FOUR DAYS ONLY";
