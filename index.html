@@ -287,13 +287,17 @@ body.pre #state-note,body.closed #state-note{display:block}
   var LINKS={ /* LIVE Stripe Payment Links, Premier Framing account, made 16 Nov 2026 */
   "200":"https://buy.stripe.com/aFa4gz3Xz6sP1UT86B6kg04","500":"https://buy.stripe.com/7sYcN53Xz18v6b9aeJ6kg05","1000":"https://buy.stripe.com/3cI14nbq14kH43186B6kg06","custom":"https://buy.stripe.com/fZu6oH8dPeZl0QPaeJ6kg07"};
   var VIP_KEY="early"; /* VIP email links point at ?vip=early */
+  /* PREVIEW: ?preview=gt7k2 unlocks the VIP page early for testing (Elijah and Gary only). Off by itself once VIP opens on Monday. */
+  var PREVIEW=/[?&]preview=gt7k2(&|$)/.test(location.search), VIP_OPEN=new Date("2026-11-23T09:00:00+00:00").getTime();
+  function NOW(){var n=Date.now();return PREVIEW&&n<VIP_OPEN?VIP_OPEN+60000:n}
   var isVip=false;try{var q=new URLSearchParams(location.search).get("vip");if(q===VIP_KEY){localStorage.setItem("mfm_vip","1")}isVip=localStorage.getItem("mfm_vip")==="1"}catch(e){isVip=/[?&]vip=early/.test(location.search)}
+  if(PREVIEW)isVip=true;
   SCHEDULE.forEach(function(r){r.t=new Date(r.start).getTime()});
   var visible=SCHEDULE.filter(function(r){return isVip||!r.vip});
   var OPEN=visible[0].t;
-  function currentRow(){var now=Date.now(),row=visible[0];visible.forEach(function(r){if(now>=r.t)row=r});return row}
+  function currentRow(){var now=NOW(),row=visible[0];visible.forEach(function(r){if(now>=r.t)row=r});return row}
   /* before opening, currentRow() is the first visible row, so the cards preview what opens */
-  function nextRow(){var now=Date.now();for(var i=0;i<visible.length;i++){if(visible[i].t>now)return visible[i]}return null}
+  function nextRow(){var now=NOW();for(var i=0;i<visible.length;i++){if(visible[i].t>now)return visible[i]}return null}
   function topRate(r){return r.rate}
   function headline(r){
     document.getElementById("hero-rate").textContent=pct(topRate(r))+" EXTRA FREE";
@@ -313,14 +317,14 @@ body.pre #state-note,body.closed #state-note{display:block}
     var r=currentRow();headline(r);
     if(body.className==="closed"){document.getElementById("hero-rate").textContent="HAS CLOSED";document.getElementById("hero-ex").innerHTML="Thank you to everyone who bought a voucher. Your credit is ready to use from 31 January 2027.<br>Missed it? The workshop is open as ever: call or WhatsApp 0800 0141007.";document.getElementById("choose-h").textContent="Black Friday 2026 has closed";var eb=document.getElementById("hero-eyebrow");if(eb)eb.textContent="BLACK FRIDAY · CLOSED";}
     var el=document.getElementById("ends-line");if(el){var nr=nextRow();var endT=nr?nr.t:CLOSE;var e=new Date(endT),names=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],mid=e.getHours()===0&&e.getMinutes()===0,d=mid?new Date(endT-60000):e,tm=mid||(e.getHours()===23&&e.getMinutes()===59)?"midnight":(e.getHours()%12||12)+(e.getHours()>=12?"pm":"am");el.textContent=(nr?"These rates end at "+tm+" on ":"Closes at "+tm+" on ")+names[d.getDay()]+" "+d.getDate()+" November."+(nr?"":" We won't be extending it.")}
-    var tag=document.getElementById("rate-now");if(tag){var nx=nextRow(),when=nx&&r.vip&&Date.now()>=OPEN?(" · changes "+["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(nx.t).getDay()]+" "+(new Date(nx.t).getHours()===0?"midnight":new Date(nx.t).getHours()+":00")):"";tag.textContent=(r.min!=null?(pct(r.rate)+" extra on £"+r.min.toLocaleString("en-GB")+" and above, "+pct(r.below)+" below"):(pct(r.rate)+" extra free on any amount"))+when}
+    var tag=document.getElementById("rate-now");if(tag){var nx=nextRow(),when=nx&&r.vip&&NOW()>=OPEN?(" · changes "+["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(nx.t).getDay()]+" "+(new Date(nx.t).getHours()===0?"midnight":new Date(nx.t).getHours()+":00")):"";tag.textContent=(r.min!=null?(pct(r.rate)+" extra on £"+r.min.toLocaleString("en-GB")+" and above, "+pct(r.below)+" below"):(pct(r.rate)+" extra free on any amount"))+when}
   }
   var body=document.body, note=document.getElementById("state-note");
   if(!note){note=document.createElement("p");note.id="state-note";var ch=document.getElementById("choose");ch.parentNode.insertBefore(note,ch.nextSibling);}
   function pad(n){return (n<10?"0":"")+n}
   function gbp(n){return "£"+Math.round(n).toLocaleString("en-GB")}
   function tick(){
-    var now=Date.now(), target, label;
+    var now=NOW(), target, label;
     if(now<OPEN){body.className="pre";target=OPEN;label="OPENS IN";note.textContent=isVip?"Your early access opens at 9am on Monday 23 November.":"Opens at 5pm on Thursday 26 November. The buttons go live then.";}
     else if(now<CLOSE){body.className="";target=CLOSE;label="CLOSES IN";}
     else{body.className="closed";target=now;label="CLOSED";note.textContent="";}
@@ -354,7 +358,7 @@ body.pre #state-note,body.closed #state-note{display:block}
   document.querySelectorAll(".talk").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();talk.classList.add("on");talk.querySelector(".x").focus();});});
   talk.querySelector(".x").addEventListener("click",function(){talk.classList.remove("on")});talk.addEventListener("click",function(e){if(e.target===talk)talk.classList.remove("on")});
   document.querySelectorAll(".buy").forEach(function(a){a.addEventListener("click",function(e){if(body.className==="pre"||body.className==="closed"){e.preventDefault();e.stopImmediatePropagation();openSoon();return;}
-    var k=a.getAttribute("data-amount"),amt=k==="custom"?parseFloat(inp.value):+k;if(amt>0){var rate=rateFor(amt);try{localStorage.setItem("mfm_bf26",JSON.stringify({custom:k==="custom",pay:amt,get:Math.round(amt*(1+rate)),rate:rate,row:currentRow(),at:Date.now()}))}catch(err){}}},true);});
+    var k=a.getAttribute("data-amount"),amt=k==="custom"?parseFloat(inp.value):+k;if(amt>0){var rate=rateFor(amt);try{localStorage.setItem("mfm_bf26",JSON.stringify({custom:k==="custom",pay:amt,get:Math.round(amt*(1+rate)),rate:rate,row:currentRow(),at:NOW()}))}catch(err){}}},true);});
   soon.querySelector(".x").addEventListener("click",closeSoon);soon.addEventListener("click",function(e){if(e.target===soon)closeSoon()});document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeSoon();talk.classList.remove("on");}});
   function titles(){var t=body.className==="pre"?(isVip?"Early access opens Monday 23 November at 9am":"Opens Thursday 26 November at 5pm"):body.className==="closed"?"Closed at midnight on Monday 30 November":"";document.querySelectorAll(".buy").forEach(function(a){if(t)a.setAttribute("title",t);else a.removeAttribute("title")});}
   setInterval(titles,1000);titles();
@@ -363,5 +367,6 @@ body.pre #state-note,body.closed #state-note{display:block}
   custom();tick();setInterval(tick,1000);
 })();
 </script>
+<script>if(/[?&]preview=gt7k2(&|$)/.test(location.search)){var b=document.createElement("div");b.textContent="PREVIEW: buttons unlocked for testing, VIP rate";b.style.cssText="position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#C4A468;color:#171717;font:600 12px/1 Poppins,Arial,sans-serif;letter-spacing:2px;text-align:center;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px))";document.body.appendChild(b)}</script>
 </body>
 </html>
