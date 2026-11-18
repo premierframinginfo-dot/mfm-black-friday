@@ -94,7 +94,7 @@ body.pre #state-note,body.closed #state-note{display:block}
   <p style="margin: 0; font-size: 11px; line-height: 1.6; color: #9A9A9A">MisterFrameMan · Premier Framing Ltd · 50-56 Pitt Street, Norwich NR3 1DF</p>
 </footer>
 <script>
-(function(){try{var d=JSON.parse(localStorage.getItem("mfm_bf26")||"null");if(d&&d.pay>0&&Date.now()-d.at<864e5){var g=function(n){return "£"+Math.round(n).toLocaleString("en-GB")},f=document.getElementById("figure");
+(function(){try{var d=JSON.parse(localStorage.getItem("mfm_bf26")||"null");if(d&&(d.pay>0||d.custom)&&Date.now()-d.at<864e5){var g=function(n){return "£"+Math.round(n).toLocaleString("en-GB")},f=document.getElementById("figure");
   if(d.custom){var r=d.row||{},pc=function(x){return Math.round(x*100)+"%"};f.innerHTML=r.min!=null?("You chose your own amount. We add <strong style=\"color:#DFD2B2\">"+pc(r.rate)+" extra</strong> on "+g(r.min)+" and above, "+pc(r.below)+" below. Gary's confirmation will show the exact credit on what you paid."):("You chose your own amount. Whatever you paid, we add <strong style=\"color:#DFD2B2;font-size:22px\">"+pc(r.rate||d.rate)+" extra</strong>. Gary's confirmation will show the exact credit.");}
   else{document.getElementById("f-pay").textContent=g(d.pay);document.getElementById("f-get").textContent=g(d.get);}
   f.style.display="block";}}catch(e){}})();
