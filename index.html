@@ -140,6 +140,10 @@ body.pre #state-note,body.closed #state-note{display:block}
   .m-extras>div>div{padding:2px 16px 16px !important}
   .m-extras p:first-child{font-size:15px !important}
   .m-extras p:last-child{font-size:13px !important;line-height:1.5 !important}
+  .m-bank{padding:20px 20px 0 !important;grid-template-columns:1fr !important;gap:12px !important}
+  .m-bank>div{padding:18px 18px 16px !important}
+  .m-bank p:first-child{font-size:15px !important}
+  .m-bank p:last-child{font-size:13.5px !important;line-height:1.55 !important}
   .m-quote{padding:36px 20px 0 !important}
   .m-quote>div{padding:24px 20px 20px !important;gap:8px !important}
   .m-quote>div>span{font-size:38px !important}
@@ -288,6 +292,17 @@ body.pre #state-note,body.closed #state-note{display:block}
     </div>
   </section>
 
+  <section class="m-bank" style="padding: 32px 24px 0 24px; max-width: 1100px; width: 100%; box-sizing: border-box; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
+    <div style="border: 1px solid #DFD2B2; padding: 24px 24px 22px; display: flex; flex-direction: column; gap: 8px; min-width: 0">
+      <p style="margin: 0; font-size: 16px; font-weight: 600; color: #171717">Refresh an old favourite</p>
+      <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #444">The piece that has hung in the same tired frame for years. Give it the mount, glass and frame it has always deserved.</p>
+    </div>
+    <div style="background: #171717; padding: 24px 24px 22px; display: flex; flex-direction: column; gap: 8px; min-width: 0">
+      <p style="margin: 0; font-size: 16px; font-weight: 600; color: #C4A468">&ldquo;Buy it &amp; Bank it&rdquo;</p>
+      <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #DDDDDD">For future framing projects. There is NO TIME LIMIT on MisterFrameMan vouchers, so you could be taking advantage of <span id="bank-rate">30%</span> FREE all through 2027.</p>
+    </div>
+  </section>
+
   <section class="m-quote" style="padding: 56px 24px 0 24px; display: flex; justify-content: center">
     <div style="max-width: 760px; width: 100%; background: #ECECEC; padding: 34px 32px 30px 32px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; box-sizing: border-box">
       <span style="font-size: 48px; line-height: 0.6; color: #9A7638; font-weight: 600">&ldquo;</span>
@@ -402,6 +417,7 @@ body.pre #state-note,body.closed #state-note{display:block}
     var r=currentRow();headline(r);
     var cl=document.getElementById("closing-line");if(cl&&r.closing)cl.textContent=r.closing;
     var tl=document.getElementById("terms-line");if(tl&&r.terms)tl.textContent=r.terms;
+    var br=document.getElementById("bank-rate");if(br&&r.rate)br.textContent=pct(r.rate);
     if(body.className==="closed"){document.getElementById("hero-rate").textContent="HAS CLOSED";document.getElementById("hero-ex").innerHTML="Thank you to everyone who bought a voucher. Your credit is ready to use from 31 January 2027.<br>Missed it? The workshop is open as ever: call or WhatsApp 0800 0141007.";document.getElementById("choose-h").textContent="Black Friday 2026 has closed";var cl2=document.getElementById("closing-line");if(cl2)cl2.textContent="Thank you. See you next year.";var eb=document.getElementById("hero-eyebrow");if(eb)eb.textContent="BLACK FRIDAY · CLOSED";}
     var el=document.getElementById("ends-line");if(el){var cr=currentRow(),nr=visible.filter(function(x){return x.t>cr.t})[0]||null;var endT=nr?nr.t:CLOSE;var e=new Date(endT),names=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],mid=e.getHours()===0&&e.getMinutes()===0,d=mid?new Date(endT-60000):e,tm=mid||(e.getHours()===23&&e.getMinutes()===59)?"midnight":(e.getHours()%12||12)+(e.getHours()>=12?"pm":"am");el.textContent=(nr?"These rates end at "+tm+" on ":"Closes at "+tm+" on ")+names[d.getDay()]+" "+d.getDate()+" November."+(nr?"":" We won't be extending it.")}
     var tag=document.getElementById("rate-now");if(tag){var nx=nextRow(),when=nx&&r.vip&&NOW()>=OPEN?(new Date(nx.t).getHours()===0?(" · closes "+["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(nx.t-60000).getDay()]+" midnight"):(" · changes "+["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(nx.t).getDay()]+" "+new Date(nx.t).getHours()+":00")):"";tag.textContent=(r.min!=null?(pct(r.rate)+" extra on £"+r.min.toLocaleString("en-GB")+" and above, "+pct(r.below)+" below"):(pct(r.rate)+" extra free on any amount"))+when}
