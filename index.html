@@ -194,7 +194,7 @@ body.pre #state-note,body.closed #state-note{display:block}
     <div style="position: absolute; inset: 0; background: rgba(10,10,10,0.78)"></div>
     <p id="hero-eyebrow" style="position: relative; margin: 0; font-size: 12px; letter-spacing: 4px; color: #C4A468">BLACK FRIDAY · FOUR DAYS ONLY</p>
     <h1 style="position: relative; margin: 0; font-size: 56px; line-height: 1.05; font-weight: 600; letter-spacing: 3px; color: #FFFFFF; max-width: 860px"><span class="h1-bf">BLACK FRIDAY<br></span><span id="hero-rate" style="font-weight: 400">50% EXTRA FREE</span></h1>
-    <p style="position: relative; margin: 0; font-size: 20px; line-height: 1.6; font-weight: 500; color: #FFFFFF; text-shadow: 0 1px 10px rgba(0,0,0,0.7); max-width: 720px" id="hero-ex">Buy a MisterFrameMan voucher and receive 50% extra free.<br>For example: spend £500 and receive framing credit for £750.</p>
+    <p style="position: relative; margin: 0; font-size: 20px; line-height: 1.6; font-weight: 500; color: #FFFFFF; text-shadow: 0 1px 10px rgba(0,0,0,0.7); max-width: 720px" id="hero-ex">Buy a MisterFrameMan voucher and receive an extra 50% for free.<br>For example: buy a £500 voucher and receive a £750 voucher.</p>
     <p id="cd-label" style="position: relative; margin: 14px 0 0; font-size: 18px; font-weight: 700; letter-spacing: 5px; color: #DFD2B2">CLOSES IN</p>
     <div id="cd-wrap" style="position: relative; display: flex; gap: 10px; align-items: flex-end; margin-top: 10px">
       <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><span id="cd-d" style="font-size: 40px; line-height: 1; font-weight: 600; color: #FFFFFF">03</span><span style="font-size: 10px; letter-spacing: 2px; color: #9A9A9A">DAYS</span></div>
@@ -426,8 +426,8 @@ body.pre #state-note,body.closed #state-note{display:block}
   function topRate(r){return r.rate}
   function headline(r){
     document.getElementById("hero-rate").textContent=pct(topRate(r))+" EXTRA FREE";
-    var ex=r.min!=null?("Spend "+gbp(r.min)+" or more on a MisterFrameMan voucher and receive "+pct(r.rate)+" extra free. Under "+gbp(r.min)+", "+pct(r.below)+" extra.<br>For example: spend "+gbp(r.min)+" and receive framing credit for "+gbp(r.min*(1+r.rate))+".")
-      :('<span class="ex1">Buy a MisterFrameMan voucher and receive '+pct(r.rate)+' extra free.<br></span><span class="ex2">For example: spend £500 and receive framing credit for '+gbp(500*(1+r.rate))+'.</span><span class="ex2m">Spend £500, get '+gbp(500*(1+r.rate))+' of framing credit.</span>');
+    var ex=r.min!=null?("Buy a MisterFrameMan voucher of "+gbp(r.min)+" or more and receive an extra "+pct(r.rate)+" for free. Under "+gbp(r.min)+", an extra "+pct(r.below)+".<br>For example: buy a "+gbp(r.min)+" voucher and receive a "+gbp(r.min*(1+r.rate))+" voucher.")
+      :('<span class="ex1">Buy a MisterFrameMan voucher and receive an extra '+pct(r.rate)+' for free.<br></span><span class="ex2">For example: buy a £500 voucher and receive a '+gbp(500*(1+r.rate))+' voucher.</span><span class="ex2m">Buy a £500 voucher, get a '+gbp(500*(1+r.rate))+' voucher.</span>');
     document.getElementById("hero-ex").innerHTML=ex;
     document.getElementById("choose-h").innerHTML="Buy a Voucher &amp; Receive "+pct(topRate(r))+" Extra Free"+(r.min!=null?" on "+gbp(r.min)+"+":"");
     var eb=document.getElementById("hero-eyebrow");if(eb)eb.textContent=r.label?r.label:(r.vip?"BLACK FRIDAY · VIP EARLY ACCESS":"BLACK FRIDAY · FOUR DAYS ONLY");
