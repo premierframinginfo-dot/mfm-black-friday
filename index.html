@@ -181,6 +181,23 @@ body.pre #state-note,body.closed #state-note{display:block}
   .m-foot p{font-size:12px !important}
 }
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1788647805521425');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 <div style="width: 100%; min-height: 100%; box-sizing: border-box; background: #FFFFFF; display: flex; flex-direction: column">
@@ -484,7 +501,7 @@ body.pre #state-note,body.closed #state-note{display:block}
   document.querySelectorAll(".talk").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();talk.classList.add("on");talk.querySelector(".x").focus();});});
   talk.querySelector(".x").addEventListener("click",function(){talk.classList.remove("on")});talk.addEventListener("click",function(e){if(e.target===talk)talk.classList.remove("on")});
   document.querySelectorAll(".buy").forEach(function(a){a.addEventListener("click",function(e){if(body.className==="pre"||body.className==="closed"){e.preventDefault();e.stopImmediatePropagation();openSoon();return;}
-    var k=a.getAttribute("data-amount");if(k==="custom"){try{localStorage.setItem("mfm_bf26",JSON.stringify({custom:true,pay:0,rate:currentRow().rate,row:currentRow(),at:NOW()}))}catch(err){}return}var amt=+k;if(amt>0){var rate=rateFor(amt);try{localStorage.setItem("mfm_bf26",JSON.stringify({custom:false,pay:amt,get:Math.round(amt*(1+rate)),rate:rate,row:currentRow(),at:NOW()}))}catch(err){}}},true);});
+    var k=a.getAttribute("data-amount");try{if(window.fbq){var v=+k>0?+k:0;fbq("track","InitiateCheckout",v?{value:v,currency:"GBP"}:{})}}catch(err){}if(k==="custom"){try{localStorage.setItem("mfm_bf26",JSON.stringify({custom:true,pay:0,rate:currentRow().rate,row:currentRow(),at:NOW()}))}catch(err){}return}var amt=+k;if(amt>0){var rate=rateFor(amt);try{localStorage.setItem("mfm_bf26",JSON.stringify({custom:false,pay:amt,get:Math.round(amt*(1+rate)),rate:rate,row:currentRow(),at:NOW()}))}catch(err){}}},true);});
   soon.querySelector(".x").addEventListener("click",closeSoon);soon.addEventListener("click",function(e){if(e.target===soon)closeSoon()});document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeSoon();talk.classList.remove("on");}});
   function titles(){var t=body.className==="pre"?((isVip&&!inGap())?"Early access opens Monday 23 November at 9am":"Opens Thursday 26 November at 5pm"):body.className==="closed"?"Closed at midnight on Monday 30 November":"";document.querySelectorAll(".buy").forEach(function(a){if(t)a.setAttribute("title",t);else a.removeAttribute("title")});}
   setInterval(titles,1000);titles();
