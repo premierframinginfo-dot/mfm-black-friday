@@ -6,7 +6,7 @@
 <title>Black Friday Vouchers: Up to 50% Extra Free | MisterFrameMan</title>
 <meta name="description" content="Buy a MisterFrameMan framing voucher this Black Friday and we add up to 50% extra, free. Museum-standard framing credit, on any amount, ready to use from 31 January 2027.">
 <meta property="og:title" content="Black Friday at MisterFrameMan: up to 50% extra free">
-<meta property="og:description" content="Buy a framing voucher and we add up to 50% extra, free. Thursday 26 November, 5pm, to midnight Sunday, then Cyber Monday.">
+<meta property="og:description" content="Buy a framing voucher and we add up to 50% extra, free. Thursday 26 November, 8am, to midnight Sunday, then Cyber Monday.">
 <meta property="og:image" content="https://offers.misterframeman.co.uk/images/ornate_mouldings.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="noindex">
@@ -380,7 +380,7 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
 
   <section class="m-terms" style="margin: 64px auto 0 auto; max-width: 820px; width: 100%; box-sizing: border-box; padding: 0 24px">
     <div style="background: #ECECEC; padding: 24px 28px; text-align: center; display: flex; flex-direction: column; gap: 6px">
-      <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #444"><strong style="color: #9A7638">Voucher terms:</strong> <span id="terms-line">30% extra on any amount, available from 5pm Thursday 26 November until midnight Sunday 29 November 2026.</span> Voucher valid for use from 31 January 2027. Not valid for work already in production with MFM or for customers in receipt of trade discounts. Vouchers are non-refundable.</p>
+      <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #444"><strong style="color: #9A7638">Voucher terms:</strong> <span id="terms-line">30% extra on any amount, available from 8am Thursday 26 November until midnight Sunday 29 November 2026.</span> Voucher valid for use from 31 January 2027. Not valid for work already in production with MFM or for customers in receipt of trade discounts. Vouchers are non-refundable.</p>
     </div>
   </section>
 
@@ -394,7 +394,7 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
   <div class="box">
     <button class="x" type="button" aria-label="Close">&times;</button>
     <p class="eyebrow" id="soon-eyebrow">NOT QUITE YET</p>
-    <h3 id="soon-h">Opens Thursday 26 November, 5pm</h3>
+    <h3 id="soon-h">Opens Thursday 26 November, 8am</h3>
     <p id="soon-p">Four days only, then it closes at midnight on Monday. Gary can hold one for you in the meantime.</p>
     <div class="cd" id="soon-cd"><div><b id="s-d">00</b><small>DAYS</small></div><i>:</i><div><b id="s-h">00</b><small>HOURS</small></div><i>:</i><div><b id="s-m">00</b><small>MINUTES</small></div><i>:</i><div><b id="s-s">00</b><small>SECONDS</small></div></div>
     <a class="go" id="soon-go" href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher%20-%20please%20hold%20one%20for%20me">EMAIL GARY TO RESERVE ONE</a>
@@ -419,8 +419,8 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
      CLOSE is when everything ends. Examples for the five options are in README.md. */
   var SCHEDULE=[
     {start:"2026-11-23T09:00:00+00:00", rate:0.5, vip:true, closing:"Three days only. Then it drops to 30%.", terms:"50% extra on any amount, VIP early access from 9am Monday 23 November until midnight Wednesday 25 November 2026."},              /* VIP window: only people who arrive with ?vip=early see it */
-    {start:"2026-11-26T00:00:00+00:00", gap:true, vip:true},             /* VIP window closes at midnight Wednesday; closed until 5pm Thursday */
-    {start:"2026-11-26T17:00:00+00:00", rate:0.3, closing:"Four days. Then it's gone.", terms:"30% extra on any amount, available from 5pm Thursday 26 November until midnight Sunday 29 November 2026."},                        /* public: 30% any amount, Thursday 5pm to Sunday midnight */
+    {start:"2026-11-26T00:00:00+00:00", gap:true, vip:true},             /* VIP window closes at midnight Wednesday; closed until 8am Thursday */
+    {start:"2026-11-26T08:00:00+00:00", rate:0.3, closing:"Four days. Then it's gone.", terms:"30% extra on any amount, available from 8am Thursday 26 November until midnight Sunday 29 November 2026."},                        /* public: 30% any amount, Thursday 8am to Sunday midnight */
     {start:"2026-11-30T00:00:00+00:00", rate:0.5, label:"CYBER MONDAY · TODAY ONLY", closing:"Today only. Then it's gone.", terms:"50% extra on any amount, Cyber Monday only, until midnight Monday 30 November 2026."} /* Cyber Monday: 50% any amount, 24 hours */
   ];
   var CLOSE=new Date("2026-12-01T00:00:00+00:00").getTime();
@@ -470,8 +470,8 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
   function gbp(n){return "£"+Math.round(n).toLocaleString("en-GB")}
   function tick(){
     var now=NOW(), target, label;
-    if(now<OPEN){body.className="pre";target=OPEN;label="OPENS IN";note.textContent=isVip?"Your early access opens at 9am on Monday 23 November.":"Opens at 5pm on Thursday 26 November. The buttons go live then.";}
-    else if(inGap()){var nr0=nextRow();body.className="pre";target=nr0?nr0.t:CLOSE;label="OPENS IN";note.textContent="Opens at 5pm on Thursday 26 November. The buttons go live then.";}
+    if(now<OPEN){body.className="pre";target=OPEN;label="OPENS IN";note.textContent=isVip?"Your early access opens at 9am on Monday 23 November.":"Opens at 8am on Thursday 26 November. The buttons go live then.";}
+    else if(inGap()){var nr0=nextRow();body.className="pre";target=nr0?nr0.t:CLOSE;label="OPENS IN";note.textContent="Opens at 8am on Thursday 26 November. The buttons go live then.";}
     else if(now<CLOSE){var nr1=nextRow();body.className="";target=nr1?nr1.t:CLOSE;label="CLOSES IN";note.textContent="";}
     else{body.className="closed";target=now;label="CLOSED";note.textContent="";}
     var t=Math.max(0,target-now);
@@ -490,8 +490,8 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
   function openSoon(){
     var closed=body.className==="closed";
     document.getElementById("soon-eyebrow").textContent=closed?"CLOSED":"NOT QUITE YET";
-    document.getElementById("soon-h").textContent=closed?"Closed at midnight, Monday 30 November":((isVip&&!inGap())?"Your early access opens Monday 23 November, 9am":"Opens Thursday 26 November, 5pm");
-    document.getElementById("soon-p").textContent=closed?"As promised, no extension. For framing at the usual prices, Gary is a message away.":((isVip&&!inGap())?"VIP access runs from 9am Monday until midnight on Wednesday. Gary can hold one for you in the meantime.":"Thursday 5pm until midnight on Sunday. Gary can hold one for you in the meantime.");
+    document.getElementById("soon-h").textContent=closed?"Closed at midnight, Monday 30 November":((isVip&&!inGap())?"Your early access opens Monday 23 November, 9am":"Opens Thursday 26 November, 8am");
+    document.getElementById("soon-p").textContent=closed?"As promised, no extension. For framing at the usual prices, Gary is a message away.":((isVip&&!inGap())?"VIP access runs from 9am Monday until midnight on Wednesday. Gary can hold one for you in the meantime.":"Thursday 8am until midnight on Sunday. Gary can hold one for you in the meantime.");
     document.getElementById("soon-cd").style.display=closed?"none":"flex";
     document.getElementById("soon-go").textContent=closed?"EMAIL GARY":"EMAIL GARY TO RESERVE ONE";
     soon.classList.add("on");soon.querySelector(".x").focus();
@@ -503,7 +503,7 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
   document.querySelectorAll(".buy").forEach(function(a){a.addEventListener("click",function(e){if(body.className==="pre"||body.className==="closed"){e.preventDefault();e.stopImmediatePropagation();openSoon();return;}
     var k=a.getAttribute("data-amount");try{if(window.fbq){var v=+k>0?+k:0;fbq("track","InitiateCheckout",v?{value:v,currency:"GBP"}:{})}}catch(err){}if(k==="custom"){try{localStorage.setItem("mfm_bf26",JSON.stringify({custom:true,pay:0,rate:currentRow().rate,row:currentRow(),at:NOW()}))}catch(err){}return}var amt=+k;if(amt>0){var rate=rateFor(amt);try{localStorage.setItem("mfm_bf26",JSON.stringify({custom:false,pay:amt,get:Math.round(amt*(1+rate)),rate:rate,row:currentRow(),at:NOW()}))}catch(err){}}},true);});
   soon.querySelector(".x").addEventListener("click",closeSoon);soon.addEventListener("click",function(e){if(e.target===soon)closeSoon()});document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeSoon();talk.classList.remove("on");}});
-  function titles(){var t=body.className==="pre"?((isVip&&!inGap())?"Early access opens Monday 23 November at 9am":"Opens Thursday 26 November at 5pm"):body.className==="closed"?"Closed at midnight on Monday 30 November":"";document.querySelectorAll(".buy").forEach(function(a){if(t)a.setAttribute("title",t);else a.removeAttribute("title")});}
+  function titles(){var t=body.className==="pre"?((isVip&&!inGap())?"Early access opens Monday 23 November at 9am":"Opens Thursday 26 November at 8am"):body.className==="closed"?"Closed at midnight on Monday 30 November":"";document.querySelectorAll(".buy").forEach(function(a){if(t)a.setAttribute("title",t);else a.removeAttribute("title")});}
   setInterval(titles,1000);titles();
   custom();tick();setInterval(function(){tick();custom()},1000);
 })();
