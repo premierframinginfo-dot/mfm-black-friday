@@ -183,6 +183,58 @@ body.pre #state-note,body.closed #state-note{display:block}
   .m-foot img{width:150px !important}
   .m-foot p{font-size:12px !important}
 }
+
+/* Wall of framed pieces */
+.wall{position:relative;overflow:hidden;background:#e9e3d8;background-image:radial-gradient(ellipse at 50% -10%,rgba(255,255,255,.7),rgba(255,255,255,0) 65%),linear-gradient(#efe9df,#e2dacc);padding:54px 0 44px}
+.wall::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.06))}
+.wall-track{display:flex;align-items:center;gap:64px;width:max-content;animation:wallmove 55s linear infinite}
+.wall:hover .wall-track{animation-play-state:paused}
+.wall-set{display:flex;align-items:center;gap:64px;padding-right:64px}
+.wp{margin:0;display:flex;flex-direction:column;align-items:center;gap:16px}
+.wl{background:#f7f3ec;padding:6px 10px;box-shadow:0 1px 3px rgba(0,0,0,.18);font-family:Poppins,Helvetica,Arial,sans-serif;text-align:left;align-self:flex-end;margin-right:6px}
+.wl b{display:block;font-size:11px;font-weight:600;letter-spacing:.06em;color:#1b1b1b;white-space:nowrap}
+.wl span{display:block;font-size:7px;font-weight:500;letter-spacing:.16em;color:#8a6d2a;margin-top:2px;white-space:nowrap}
+@media (max-width:700px){.wp{gap:11px}.wl{padding:4px 7px}.wl b{font-size:9px}.wl span{font-size:6px}}
+.wall-set{align-items:flex-end}
+.wall img{display:block;width:auto;max-width:none;filter:drop-shadow(0 12px 14px rgba(0,0,0,.26)) drop-shadow(0 2px 3px rgba(0,0,0,.18))}
+.w-banksy{height:250px}.w-unionjack{height:190px}.w-brainwash{height:205px}.w-emin{height:200px}.w-noir{height:135px}.w-pejac{height:255px}.w-smith{height:190px}
+@keyframes wallmove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (max-width:700px){.wall{padding:36px 0 30px}.wall-track,.wall-set{gap:40px}.wall-set{padding-right:40px}.w-banksy{height:165px}.w-unionjack{height:125px}.w-brainwash{height:135px}.w-emin{height:132px}.w-noir{height:90px}.w-pejac{height:168px}.w-smith{height:125px}.wall-track{animation-duration:42s}}
+@media (prefers-reduced-motion:reduce){.wall-track{animation:none}.wall{overflow-x:auto}}
+.covers{padding:34px 24px 0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.covers .eye{margin:0;font-size:12px;letter-spacing:4px;color:#9A7638;font-weight:600}
+.covers .txt{margin:0;font-size:17px;line-height:1.6;color:#171717;max-width:640px}
+.covers .trust{margin:4px 0 0;font-size:13px;line-height:1.6;color:#777;max-width:640px}
+/* Quote request */
+.q-wrap{padding:56px 24px 0;display:flex;justify-content:center}
+.q-box{max-width:760px;width:100%;box-sizing:border-box;border:1px solid #DFD2B2;background:#FBF8F2;padding:34px 30px;text-align:center}
+.q-eye{margin:0;font-size:11px;letter-spacing:4px;color:#9A7638;font-weight:600}
+.q-box h2{margin:10px 0 8px;font-size:26px;line-height:1.2;font-weight:600;color:#171717}
+.q-box .q-p{margin:0 auto;font-size:15px;line-height:1.6;color:#444;max-width:560px}
+.q-btn{margin-top:20px;background:#171717;color:#fff;border:0;font:600 13px Poppins,Helvetica,Arial,sans-serif;letter-spacing:2px;padding:17px 36px;min-height:48px;cursor:pointer}
+.q-btn:hover{opacity:.9}
+#q-form{text-align:left;margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+#q-form[hidden]{display:none}
+#q-form label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#171717;min-width:0}
+#q-form label small{font-weight:400;color:#888}
+#q-form .full{grid-column:1/-1}
+#q-form input,#q-form textarea{font:400 15px Poppins,Helvetica,Arial,sans-serif;border:1px solid #CFC6B3;background:#fff;padding:12px 12px;border-radius:0;color:#171717;width:100%;box-sizing:border-box}
+#q-form input[type=file]{padding:9px;font-size:13px}
+#q-form textarea{min-height:90px;resize:vertical}
+#q-form input:focus,#q-form textarea:focus{outline:2px solid #9A7638;outline-offset:-1px}
+#q-form .q-send{grid-column:1/-1;justify-self:center;background:#9A7638;margin-top:6px}
+#q-form .q-small{grid-column:1/-1;text-align:center;margin:0;font-size:12px;color:#888}
+.q-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+.q-err{grid-column:1/-1;margin:0;color:#a3341f;font-size:13px;text-align:center}
+#q-sent{margin-top:18px;font-size:16px;line-height:1.6;color:#171717}
+@media (max-width:600px){#q-form{grid-template-columns:1fr}.q-box{padding:28px 20px}}
+/* Sticky buy bar (phones) */
+#sticky-buy{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#171717;border-top:1px solid #9A7638;display:none;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));box-sizing:border-box;transform:translateY(110%);transition:transform .3s ease}
+#sticky-buy .sb-t{color:#fff;font-size:13px;line-height:1.35;font-weight:500}
+#sticky-buy .sb-t b{color:#C4A468;font-weight:600}
+#sticky-buy a{flex:0 0 auto;background:#9A7638;color:#fff;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:1.8px;padding:14px 16px;min-height:44px;box-sizing:border-box;display:inline-flex;align-items:center}
+@media (max-width:700px){#sticky-buy{display:flex}#sticky-buy.on{transform:translateY(0)}body.has-sticky{padding-bottom:0}}
+body.pre #sticky-buy,body.closed #sticky-buy{display:none}
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -228,10 +280,17 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
     <a id="hero-cta" href="#choose" style="position: relative; display: inline-block; background: #9A7638; color: #FFFFFF; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 2px; padding: 18px 44px; min-height: 44px; box-sizing: border-box; margin-top: 6px">CHOOSE YOUR VOUCHER</a>
   </section>
 
+
+  <section class="wall" aria-label="Pieces framed by MisterFrameMan"><div class="wall-track"><div class="wall-set"><figure class="wp"><img class="w-banksy" src="images/wall/banksy.webp" alt="Banksy print in an antique gold frame" loading="eager" decoding="async"><figcaption class="wl"><b>BANKSY</b><span>FRAMED BY MISTERFRAMEMAN</span></figcaption></figure><figure class="wp"><img class="w-emin" src="images/wall/emin.webp" alt="Tracey Emin print, The Kiss, in a slim frame" loading="eager" decoding="async"><figcaption class="wl"><b>TRACEY EMIN</b><span>FRAMED BY MISTERFRAMEMAN</span></figcaption></figure><figure class="wp"><img class="w-unionjack" src="images/wall/unionjack.webp" alt="Peter Blake Union Jack portrait in an ornate gold frame" loading="eager" decoding="async"><figcaption class="wl"><b>PETER BLAKE</b><span>FRAMED BY MISTERFRAMEMAN</span></figcaption></figure><figure class="wp"><img class="w-noir" src="images/wall/noir.webp" alt="Pair of Thierry Noir heads float mounted in a white box frame" loading="eager" decoding="async"><figcaption class="wl"><b>THIERRY NOIR</b><span>FRAMED BY MISTERFRAMEMAN</span></figcaption></figure><figure class="wp"><img class="w-brainwash" src="images/wall/brainwash.webp" alt="Mr Brainwash canvas in a gilded frame" loading="eager" decoding="async"><figcaption class="wl"><b>MR BRAINWASH</b><span>FRAMED BY MISTERFRAMEMAN</span></figcaption></figure><figure class="wp"><img class="w-pejac" src="images/wall/pejac.webp" alt="Pejac print in a silver frame" loading="eager" decoding="async"><figcaption class="wl"><b>PEJAC</b><span>FRAMED BY MISTERFRAMEMAN</span></figcaption></figure><figure class="wp"><img class="w-smith" src="images/wall/smith.webp" alt="Nick Smith print in a pale silver frame" loading="eager" decoding="async"><figcaption class="wl"><b>NICK SMITH</b><span>FRAMED BY MISTERFRAMEMAN</span></figcaption></figure></div><div class="wall-set" aria-hidden="true"><figure class="wp"><img class="w-banksy" src="images/wall/banksy.webp" alt="" loading="lazy" decoding="async"><figcaption class="wl"><b>BANKSY</b><span>FRAMED BY MISTERFRAMEMAN</span></figcaption></figure><figure class="wp"><img class="w-emin" src="images/wall/emin.webp" alt="" loading="lazy" decoding="async"><figcaption class="wl"><b>TRACEY EMIN</b><span>FRAMED BY MISTERFRAMEMAN</span></figcaption></figure><figure class="wp"><img class="w-unionjack" src="images/wall/unionjack.webp" alt="" loading="lazy" decoding="async"><figcaption class="wl"><b>PETER BLAKE</b><span>FRAMED BY MISTERFRAMEMAN</span></figcaption></figure><figure class="wp"><img class="w-noir" src="images/wall/noir.webp" alt="" loading="lazy" decoding="async"><figcaption class="wl"><b>THIERRY NOIR</b><span>FRAMED BY MISTERFRAMEMAN</span></figcaption></figure><figure class="wp"><img class="w-brainwash" src="images/wall/brainwash.webp" alt="" loading="lazy" decoding="async"><figcaption class="wl"><b>MR BRAINWASH</b><span>FRAMED BY MISTERFRAMEMAN</span></figcaption></figure><figure class="wp"><img class="w-pejac" src="images/wall/pejac.webp" alt="" loading="lazy" decoding="async"><figcaption class="wl"><b>PEJAC</b><span>FRAMED BY MISTERFRAMEMAN</span></figcaption></figure><figure class="wp"><img class="w-smith" src="images/wall/smith.webp" alt="" loading="lazy" decoding="async"><figcaption class="wl"><b>NICK SMITH</b><span>FRAMED BY MISTERFRAMEMAN</span></figcaption></figure></div></div></section>
+  <section class="covers">
+    <p class="eye">BESPOKE CONSERVATION PICTURE FRAMING</p>
+    <p class="txt">Your voucher covers any picture framing we do: originals, prints, photographs, signed shirts, anything you want on the wall.</p>
+    <p class="trust">30 years of framing · Guild Commended Framers · Trusted by the Fitzwilliam Museum and Norwich Castle</p>
+  </section>
   <section id="choose" class="m-choose" style="padding: 72px 24px 24px 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
     <h2 id="choose-h" style="margin: 0; font-size: 30px; line-height: 1.2; font-weight: 600; color: #9A7638">Buy a Voucher &amp; Receive 30% Extra Free</h2>
-    <p id="choose-intro" style="margin: 0; font-size: 16px; line-height: 1.6; color: #444; max-width: 620px">Pick an amount, or choose your own. There's no minimum and no maximum. Your confirmation arrives by email: Gary confirms the credit on your account, ready to use from 31 January 2027.</p>
-    <p id="choose-intro-m">No minimum, no maximum. Credit ready to use from 31 January 2027.</p>
+    <p id="choose-intro" style="margin: 0; font-size: 16px; line-height: 1.6; color: #444; max-width: 620px">Pick an amount, or choose your own. There's no minimum and no maximum. Your confirmation arrives by email.</p>
+    <p id="choose-intro-m">No minimum, no maximum.</p>
     <p id="rate-now" style="margin: 6px 0 0; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #9A7638"></p>
     <div id="closed-panel">
       <div class="box">
@@ -244,16 +303,6 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
     </div>
   </section>
 
-  <section id="any-bar" style="padding: 24px 24px 0 24px; max-width: 1100px; width: 100%; box-sizing: border-box; margin: 0 auto">
-    <div class="ab">
-      <div class="ab-txt">
-        <p class="ab-h">Choose your own amount</p>
-        <p class="ab-p"><span id="custom-get">30%</span> extra on any amount. Type your amount at checkout.</p>
-      </div>
-      <a href="#" id="custom-buy" class="buy ab-btn" data-amount="custom">CHOOSE YOUR AMOUNT</a>
-    </div>
-    <p class="ab-or">OR PICK A VOUCHER</p>
-  </section>
 
   <section id="choose-grid" style="padding: 24px 24px 16px 24px; max-width: 1100px; width: 100%; box-sizing: border-box; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px">
     <div class="tc" style="border: 1px solid #DFD2B2">
@@ -263,30 +312,56 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
       <span class="tc-free" data-free="200">£100 FREE</span>
       <a href="#" class="buy tc-btn" data-amount="200" style="background: #171717">BUY £200</a>
     </div>
-    <div class="tc" style="border: 1px solid #DFD2B2">
+    <div class="tc" style="border: 2px solid #9A7638">
+      <span class="tc-tag">MOST POPULAR</span>
       <div class="tc-top"><span class="tc-paylab">You pay</span><span class="tc-pay">£500</span></div>
       <div class="tc-rule"></div>
       <div class="tc-get"><span class="tc-getlab">YOU RECEIVE</span><span class="tc-getamt" data-get="500">£750</span></div>
       <span class="tc-free" data-free="500">£250 FREE</span>
-      <a href="#" class="buy tc-btn" data-amount="500" style="background: #171717">BUY £500</a>
+      <a href="#" class="buy tc-btn" data-amount="500" style="background: #9A7638">BUY £500</a>
     </div>
-    <div class="tc" style="border: 2px solid #9A7638">
-      <span class="tc-tag">MOST POPULAR</span>
+    <div class="tc" style="border: 1px solid #DFD2B2">
       <div class="tc-top"><span class="tc-paylab">You pay</span><span class="tc-pay">£1,000</span></div>
       <div class="tc-rule"></div>
       <div class="tc-get"><span class="tc-getlab">YOU RECEIVE</span><span class="tc-getamt" data-get="1000">£1,500</span></div>
       <span class="tc-free" data-free="1000">£500 FREE</span>
-      <a href="#" class="buy tc-btn" data-amount="1000" style="background: #9A7638">BUY £1,000</a>
+      <a href="#" class="buy tc-btn" data-amount="1000" style="background: #171717">BUY £1,000</a>
     </div>
-    <div class="tc" style="border: 1px solid #DFD2B2">
-      <div class="tc-top"><span class="tc-paylab">You pay</span><span class="tc-pay">£2,500</span></div>
-      <div class="tc-rule"></div>
-      <div class="tc-get"><span class="tc-getlab">YOU RECEIVE</span><span class="tc-getamt" data-get="2500">£3,750</span></div>
-      <span class="tc-free" data-free="2500">£1,250 FREE</span>
-      <a href="#" class="buy tc-btn" data-amount="2500" style="background: #171717">BUY £2,500</a>
+      </section>
+  <section id="any-bar" style="padding: 24px 24px 0 24px; max-width: 1100px; width: 100%; box-sizing: border-box; margin: 0 auto">
+    <p class="ab-or" style="margin:0 0 14px">OR CHOOSE YOUR OWN AMOUNT</p>
+    <div class="ab">
+      <div class="ab-txt">
+        <p class="ab-h">Choose your own amount</p>
+        <p class="ab-p"><span id="custom-get">30%</span> extra on any amount. Type your amount at checkout.</p>
+      </div>
+      <a href="#" id="custom-buy" class="buy ab-btn" data-amount="custom">CHOOSE YOUR AMOUNT</a>
     </div>
   </section>
   <p id="secure-line" style="margin: 0; padding: 8px 24px 0 24px; text-align: center; font-size: 13px; color: #666">Secure checkout with card, Apple Pay or Google Pay. Prefer to talk to a human? <a href="mailto:gary@premierframing.com?subject=Black%20Friday%20voucher">Email Gary</a>, <a href="#contact" class="talk">call or WhatsApp</a>.</p>
+
+  <section id="quote" class="q-wrap">
+    <div class="q-box">
+      <p class="q-eye">NOT SURE WHAT IT WILL COST?</p>
+      <h2>Get a free framing quote</h2>
+      <p class="q-p">Tell Gary what you'd like framed and he'll come back with a price, so you know which voucher to buy.</p>
+      <button type="button" class="q-btn" id="q-open">REQUEST A QUOTE</button>
+      <form id="q-form" novalidate hidden>
+        <input type="text" name="psf_ref_code" class="q-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label>Your name<input type="text" name="name" required autocomplete="name"></label>
+        <label>Email<input type="email" name="email" required autocomplete="email"></label>
+        <label class="full">What would you like framed?<input type="text" name="artwork" required placeholder="e.g. Banksy, Girl with Balloon print"></label>
+        <label class="full">Photo of the piece <small>(optional)</small><input type="file" name="photo" accept="image/*"></label>
+        <label>Rough size <small>(optional)</small><input type="text" name="size" placeholder="e.g. 50 x 70 cm"></label>
+        <label>Phone <small>(optional)</small><input type="tel" name="phone" autocomplete="tel"></label>
+        <label class="full">Any ideas on how you'd like it framed? <small>(optional, fine if not)</small><textarea name="framing_ideas" placeholder="e.g. black frame, museum glass, float mounted"></textarea></label>
+        <p class="q-err" id="q-err" hidden></p>
+        <button type="submit" class="q-btn q-send">SEND TO GARY</button>
+        <p class="q-small">Gary replies by email. Or call or WhatsApp 0800 0141007.</p>
+      </form>
+      <p id="q-sent" hidden><strong>Thank you, Gary has your request.</strong><br>He'll come back to you with a price by email.</p>
+    </div>
+  </section>
 
   <section class="m-how" style="margin-top: 72px; background: #171717; padding: 64px 24px; display: flex; flex-direction: column; align-items: center; gap: 36px">
     <h2 style="margin: 0; font-size: 13px; letter-spacing: 4px; font-weight: 600; color: #C4A468; text-align: center">HOW IT WORKS</h2>
@@ -299,7 +374,7 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
       <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; min-width: 0">
         <span style="font-size: 36px; font-weight: 600; color: #9A7638; line-height: 1">2</span>
         <p style="margin: 0; font-size: 16px; font-weight: 600; color: #FFFFFF">Payment confirmation</p>
-        <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #BBBBBB; max-width: 300px">You'll receive immediate payment confirmation, then a notification from the MFM team that the credit has been added to your account.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #BBBBBB; max-width: 300px">You'll receive immediate payment confirmation, then a notification from the MFM team that the credit has been added to your account, ready to use from 31 January 2027.</p>
       </div>
       <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; min-width: 0">
         <span style="font-size: 36px; font-weight: 600; color: #9A7638; line-height: 1">3</span>
@@ -512,5 +587,37 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
 })();
 </script>
 <script>if(/[?&]preview=gt7k2(&|$)/.test(location.search)){var b=document.createElement("div");b.textContent="PREVIEW: buttons unlocked for testing, VIP rate";b.style.cssText="position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#C4A468;color:#171717;font:600 12px/1 Poppins,Arial,sans-serif;letter-spacing:2px;text-align:center;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px))";document.body.appendChild(b)}</script>
+<div id="sticky-buy" aria-hidden="true"><span class="sb-t"><b id="sb-rate">30% extra free</b><br><span id="sb-end">Ends midnight Sunday</span></span><a href="#choose-grid" tabindex="-1">BUY A VOUCHER</a></div>
+<script>
+(function(){
+  /* Quote requests go to Elijah's Apps Script (same web app as the other Premier Framing sites), tab "MFM quote requests". No notify field, so it is emailed. */
+  var SHEET_URL="https://script.google.com/macros/s/AKfycbxadnXU1xpwHz77IsxcyHKN9ZCqIUWZnjHcop5fIpYc01oRxZyba95kdjFuN39mE2OT/exec";
+  var f=document.getElementById("q-form"),o=document.getElementById("q-open"),sent=document.getElementById("q-sent"),err=document.getElementById("q-err"),opened=0;
+  if(o)o.addEventListener("click",function(){f.hidden=false;o.hidden=true;opened=Date.now();var i=f.querySelector("input[name=name]");if(i)i.focus();try{if(window.gtag)gtag("event","quote_form_open")}catch(e){}});
+  function readPhoto(file){return new Promise(function(res){if(!file||!/^image\//.test(file.type||""))return res(null);var img=new Image(),u=URL.createObjectURL(file);img.onload=function(){var m=1600,w=img.naturalWidth,h=img.naturalHeight,k=Math.min(1,m/Math.max(w,h)),c=document.createElement("canvas");c.width=Math.round(w*k);c.height=Math.round(h*k);c.getContext("2d").drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);var d=c.toDataURL("image/jpeg",0.82);res({name:(file.name||"photo").replace(/\.[^.]+$/,"")+".jpg",type:"image/jpeg",data:d.split(",")[1]})};img.onerror=function(){URL.revokeObjectURL(u);var r=new FileReader();r.onload=function(){var d=String(r.result);res(d.indexOf(",")>-1?{name:file.name,type:file.type,data:d.split(",")[1]}:null)};r.onerror=function(){res(null)};if(file.size<8e6)r.readAsDataURL(file);else res(null)};img.src=u})}
+  if(f)f.addEventListener("submit",function(ev){ev.preventDefault();var g=function(n){var e=f.elements[n];return e?String(e.value||"").trim():""};
+    var name=g("name"),email=g("email"),art=g("artwork");
+    if(!name||!email||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)||!art){err.textContent="Please add your name, a valid email and what you'd like framed.";err.hidden=false;return}
+    err.hidden=true;
+    var btn=f.querySelector(".q-send");btn.disabled=true;btn.textContent="SENDING…";
+    var bot=g("psf_ref_code")!==""||(opened&&Date.now()-opened<3000);
+    var sp=name.indexOf(" "),first=sp<0?name:name.slice(0,sp),last=sp<0?"":name.slice(sp+1).trim();
+    var msg="Type: Framing quote (Black Friday offers page)\nWhat to frame: "+art+(g("size")?"\nRough size: "+g("size"):"")+(g("framing_ideas")?"\nFraming ideas: "+g("framing_ideas"):"");
+    var file=f.elements.photo&&f.elements.photo.files&&f.elements.photo.files[0];
+    readPhoto(file).then(function(p){
+      var done=function(){f.hidden=true;sent.hidden=false;sent.scrollIntoView({block:"center"})};
+      if(bot){done();return}
+      var fd=new FormData();fd.append("tab","MFM quote requests");fd.append("form","MFM Black Friday quote request");fd.append("first_name",first);fd.append("last_name",last);fd.append("email",email);fd.append("phone",g("phone"));fd.append("message",msg);fd.append("opt_in","No");
+      if(p){fd.append("photo_name",p.name);fd.append("photo_type",p.type);fd.append("photo_data",p.data)}
+      fetch(SHEET_URL,{method:"POST",body:fd,mode:"no-cors"}).catch(function(){});
+      try{if(window.gtag)gtag("event","generate_lead",{form:"quote"})}catch(e){}try{if(window.fbq)fbq("track","Lead")}catch(e){}
+      done()})});
+  var bar=document.getElementById("sticky-buy"),hero=document.querySelector(".m-hero"),grid=document.getElementById("choose-grid"),qf=document.getElementById("quote"),foot=document.querySelector(".m-foot");
+  function vis(el){if(!el)return false;var r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0}
+  function upd(){if(!bar)return;var past=hero&&hero.getBoundingClientRect().bottom<0;var show=past&&!vis(grid)&&!vis(qf)&&!vis(foot)&&!document.querySelector("#q-form input:focus,#q-form textarea:focus");bar.classList.toggle("on",!!show)}
+  addEventListener("scroll",upd,{passive:true});addEventListener("resize",upd);setTimeout(upd,500);
+  try{var r=currentRow();document.getElementById("sb-rate").textContent=pct(r.rate)+" extra free";var el=document.getElementById("ends-line");var cr=r,nr=visible.filter(function(x){return x.t>cr.t})[0]||null,endT=nr?nr.t:CLOSE,d=new Date(endT-60000);document.getElementById("sb-end").textContent=(r.label&&/TODAY/.test(r.label))?"Today only, ends midnight":"Ends midnight "+["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][d.getDay()]}catch(e){}
+})();
+</script>
 </body>
 </html>
