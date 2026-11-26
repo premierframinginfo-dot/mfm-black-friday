@@ -232,7 +232,8 @@ body.pre #state-note,body.closed #state-note{display:block}
 #sticky-buy .sb-t{color:#fff;font-size:13px;line-height:1.35;font-weight:500}
 #sticky-buy .sb-t b{color:#C4A468;font-weight:600}
 #sticky-buy a{flex:0 0 auto;background:#9A7638;color:#fff;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:1.8px;padding:14px 16px;min-height:44px;box-sizing:border-box;display:inline-flex;align-items:center}
-@media (max-width:700px){#sticky-buy{display:flex}#sticky-buy.on{transform:translateY(0)}body.has-sticky{padding-bottom:0}}
+#sticky-buy{display:flex}#sticky-buy.on{transform:translateY(0)}
+@media (min-width:701px){#sticky-buy{justify-content:center;gap:28px;padding:12px 24px}#sticky-buy .sb-t{font-size:14px}#sticky-buy .sb-t br{display:none}#sticky-buy .sb-t b::after{content:" \00B7 ";color:#777;font-weight:400}#sticky-buy a{font-size:13px;padding:13px 26px}}
 body.pre #sticky-buy,body.closed #sticky-buy{display:none}
 </style>
 <!-- Meta Pixel Code -->
