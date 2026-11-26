@@ -187,7 +187,7 @@ body.pre #state-note,body.closed #state-note{display:block}
 /* Wall of framed pieces */
 .wall{position:relative;overflow:hidden;background:#e9e3d8;background-image:radial-gradient(ellipse at 50% -10%,rgba(255,255,255,.7),rgba(255,255,255,0) 65%),linear-gradient(#efe9df,#e2dacc);padding:54px 0 44px}
 .wall::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.06))}
-.wall-track{display:flex;align-items:center;gap:64px;width:max-content;animation:wallmove 55s linear infinite}
+.wall-track{display:flex;align-items:center;gap:0;width:max-content;animation:wallmove 55s linear infinite}
 .wall:hover .wall-track{animation-play-state:paused}
 .wall-set{display:flex;align-items:center;gap:64px;padding-right:64px}
 .wp{margin:0;position:relative;height:330px;padding-bottom:58px;box-sizing:border-box;display:flex;align-items:center;flex:0 0 auto}
@@ -198,7 +198,7 @@ body.pre #state-note,body.closed #state-note{display:block}
 .wall img{display:block;width:auto;max-width:none;filter:drop-shadow(0 12px 14px rgba(0,0,0,.26)) drop-shadow(0 2px 3px rgba(0,0,0,.18))}
 .w-banksy{height:250px}.w-unionjack{height:190px}.w-brainwash{height:205px}.w-emin{height:200px}.w-noir{height:135px}.w-pejac{height:255px}.w-smith{height:190px}.w-queenvic{height:245px}
 @keyframes wallmove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media (max-width:700px){.wall{padding:36px 0 30px}.wall-track,.wall-set{gap:40px}.wall-set{padding-right:40px}.w-banksy{height:165px}.w-unionjack{height:125px}.w-brainwash{height:135px}.w-emin{height:132px}.w-noir{height:90px}.w-pejac{height:168px}.w-smith{height:125px}.w-queenvic{height:160px}.wall-track{animation-duration:42s}}
+@media (max-width:700px){.wall{padding:36px 0 30px}.wall-set{gap:40px}.wall-set{padding-right:40px}.w-banksy{height:165px}.w-unionjack{height:125px}.w-brainwash{height:135px}.w-emin{height:132px}.w-noir{height:90px}.w-pejac{height:168px}.w-smith{height:125px}.w-queenvic{height:160px}.wall-track{animation-duration:42s}}
 @media (prefers-reduced-motion:reduce){.wall-track{animation:none}.wall{overflow-x:auto}}
 .covers{padding:34px 24px 0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
 .covers .eye{margin:0;font-size:12px;letter-spacing:4px;color:#9A7638;font-weight:600}
