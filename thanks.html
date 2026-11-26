@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Thank you | MisterFrameMan</title>
 <meta name="description" content="Your MisterFrameMan voucher payment went through.">
-<meta property="og:title" content="Black Friday. 50% extra free. | MisterFrameMan">
-<meta property="og:description" content="Spend £200, receive £300 of conservation framing. Four days only, closes midnight Monday 30 November.">
+<meta property="og:title" content="Black Friday at MisterFrameMan: 30% extra free on framing vouchers">
+<meta property="og:description" content="Buy a framing voucher and receive an extra 30% for free. Ends midnight Sunday.">
 <meta property="og:image" content="images/ornate_mouldings.jpg">
 <meta name="robots" content="noindex">
+<!-- Google Analytics (MFM Offers site) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RGJ7DBRHXC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-RGJ7DBRHXC');</script>
 <link rel="icon" href="images/mfm-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -111,7 +114,7 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
   <p style="margin: 0; font-size: 11px; line-height: 1.6; color: #9A9A9A">MisterFrameMan · Premier Framing Ltd · 50-56 Pitt Street, Norwich NR3 1DF</p>
 </footer>
 <script>
-(function(){try{var d=JSON.parse(localStorage.getItem("mfm_bf26")||"null");if(d&&(d.pay>0||d.custom)&&Date.now()-d.at<864e5){try{if(window.fbq&&localStorage.getItem("mfm_bf26_px")!==String(d.at)){fbq("track","Purchase",{value:d.pay||0,currency:"GBP"});localStorage.setItem("mfm_bf26_px",String(d.at))}}catch(e2){}var g=function(n){return "£"+Math.round(n).toLocaleString("en-GB")},f=document.getElementById("figure");
+(function(){try{var d=JSON.parse(localStorage.getItem("mfm_bf26")||"null");if(d&&(d.pay>0||d.custom)&&Date.now()-d.at<864e5){try{if(window.fbq&&localStorage.getItem("mfm_bf26_px")!==String(d.at)){fbq("track","Purchase",{value:d.pay||0,currency:"GBP"});try{if(window.gtag)gtag("event","purchase",{transaction_id:"bf26-"+d.at,value:d.pay||0,currency:"GBP",items:[{item_name:"Framing voucher",price:d.pay||0,quantity:1}]})}catch(e3){}localStorage.setItem("mfm_bf26_px",String(d.at))}}catch(e2){}var g=function(n){return "£"+Math.round(n).toLocaleString("en-GB")},f=document.getElementById("figure");
   if(d.custom){var r=d.row||{},pc=function(x){return Math.round(x*100)+"%"};f.innerHTML=r.min!=null?("You chose your own amount. We add <strong style=\"color:#DFD2B2\">"+pc(r.rate)+" extra</strong> on "+g(r.min)+" and above, "+pc(r.below)+" below. Gary's confirmation will show the exact credit on what you paid."):("You chose your own amount. Whatever you paid, we add <strong style=\"color:#DFD2B2;font-size:22px\">"+pc(r.rate||d.rate)+" extra</strong>. Gary's confirmation will show the exact credit.");}
   else{document.getElementById("f-pay").textContent=g(d.pay);document.getElementById("f-get").textContent=g(d.get);}
   f.style.display="block";}}catch(e){}})();
