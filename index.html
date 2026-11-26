@@ -212,7 +212,13 @@ body.pre #state-note,body.closed #state-note{display:block}
 .q-box .q-p{margin:0 auto;font-size:15px;line-height:1.6;color:#444;max-width:560px}
 .q-btn{margin-top:20px;background:#171717;color:#fff;border:0;font:600 13px Poppins,Helvetica,Arial,sans-serif;letter-spacing:2px;padding:17px 36px;min-height:48px;cursor:pointer}
 .q-btn:hover{opacity:.9}
-#q-form{text-align:left;margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+#q-form{text-align:left;margin:24px auto 0;max-width:520px;display:grid;grid-template-columns:1fr;gap:14px}
+.q-prog{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:2px;font-weight:600;color:#9A7638;text-transform:uppercase}.q-prog i{flex:1;height:2px;background:#E7DCC4;display:block}.q-prog b{display:block;height:100%;width:33.3%;background:#9A7638;transition:width .35s ease}
+.q-step{border:0;margin:0;padding:0;min-width:0;display:grid;gap:14px;animation:qin .35s ease}.q-step[hidden]{display:none}@keyframes qin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.q-step legend{padding:0;margin:0 0 12px;font-size:19px;font-weight:600;color:#171717;line-height:1.3}.q-step legend small{font-size:13px;font-weight:400;color:#888}
+.q-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:4px}.q-nav .q-send{margin:0 0 0 auto}
+.q-back{background:none;border:0;font:500 14px Poppins,Helvetica,Arial,sans-serif;color:#555;cursor:pointer;padding:12px 4px;min-height:44px}.q-back:hover{color:#171717}
+@media (prefers-reduced-motion:reduce){.q-step{animation:none}.q-prog b{transition:none}}
 #q-form[hidden]{display:none}
 #q-form label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#171717;min-width:0}
 #q-form label small{font-weight:400;color:#888}
@@ -221,12 +227,12 @@ body.pre #state-note,body.closed #state-note{display:block}
 #q-form input[type=file]{padding:9px;font-size:13px}
 #q-form textarea{min-height:90px;resize:vertical}
 #q-form input:focus,#q-form textarea:focus{outline:2px solid #9A7638;outline-offset:-1px}
-#q-form .q-send{grid-column:1/-1;justify-self:center;background:#9A7638;margin-top:6px}
+#q-form .q-send{background:#9A7638}
 #q-form .q-small{grid-column:1/-1;text-align:center;margin:0;font-size:12px;color:#888}
 .q-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
 .q-err{grid-column:1/-1;margin:0;color:#a3341f;font-size:13px;text-align:center}
 #q-sent{margin-top:18px;font-size:16px;line-height:1.6;color:#171717}
-@media (max-width:600px){#q-form{grid-template-columns:1fr}.q-box{padding:28px 20px}}
+@media (max-width:600px){.q-box{padding:28px 20px}.q-nav .q-send{padding:17px 26px}}
 /* Sticky buy bar (phones) */
 #sticky-buy{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#171717;border-top:1px solid #9A7638;display:none;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));box-sizing:border-box;transform:translateY(110%);transition:transform .3s ease}
 #sticky-buy .sb-t{color:#fff;font-size:13px;line-height:1.35;font-weight:500}
@@ -348,15 +354,25 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
       <button type="button" class="q-btn" id="q-open">REQUEST A QUOTE</button>
       <form id="q-form" novalidate hidden>
         <input type="text" name="psf_ref_code" class="q-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <label>Your name<input type="text" name="name" required autocomplete="name"></label>
-        <label>Email<input type="email" name="email" required autocomplete="email"></label>
-        <label class="full">What would you like framed?<input type="text" name="artwork" required placeholder="e.g. Banksy, Girl with Balloon print"></label>
-        <label class="full">Photo of the piece <small>(optional)</small><input type="file" name="photo" accept="image/*"></label>
-        <label>Rough size <small>(optional)</small><input type="text" name="size" placeholder="e.g. 50 x 70 cm"></label>
-        <label>Phone <small>(optional)</small><input type="tel" name="phone" autocomplete="tel"></label>
-        <label class="full">Any ideas on how you'd like it framed? <small>(optional, fine if not)</small><textarea name="framing_ideas" placeholder="e.g. black frame, museum glass, float mounted"></textarea></label>
+        <div class="q-prog" aria-hidden="true"><span id="q-stepno">Step 1 of 3</span><i><b id="q-bar"></b></i></div>
+        <fieldset class="q-step" data-step="1">
+          <legend>What would you like framed?</legend>
+          <label class="full">The piece<input type="text" name="artwork" required placeholder="e.g. Banksy, Girl with Balloon print"></label>
+          <label class="full q-file">Add a photo <small>(optional, helps Gary price it)</small><input type="file" name="photo" accept="image/*"></label>
+        </fieldset>
+        <fieldset class="q-step" data-step="2" hidden>
+          <legend>Size and ideas <small>(both optional)</small></legend>
+          <label class="full">Rough size<input type="text" name="size" placeholder="e.g. 50 x 70 cm"></label>
+          <label class="full">How would you like it framed? <small>Fine if you're not sure</small><textarea name="framing_ideas" placeholder="e.g. black frame, museum glass, float mounted"></textarea></label>
+        </fieldset>
+        <fieldset class="q-step" data-step="3" hidden>
+          <legend>Where should Gary send the price?</legend>
+          <label class="full">Your name<input type="text" name="name" required autocomplete="name"></label>
+          <label class="full">Email<input type="email" name="email" required autocomplete="email"></label>
+          <label class="full">Phone <small>(optional)</small><input type="tel" name="phone" autocomplete="tel"></label>
+        </fieldset>
         <p class="q-err" id="q-err" hidden></p>
-        <button type="submit" class="q-btn q-send">SEND TO GARY</button>
+        <div class="q-nav"><button type="button" class="q-back" id="q-back" hidden>&larr; Back</button><button type="submit" class="q-btn q-send" id="q-next">CONTINUE</button></div>
         <p class="q-small">Gary replies by email. Or call or WhatsApp 0800 0141007.</p>
       </form>
       <p id="q-sent" hidden><strong>Thank you, Gary has your request.</strong><br>He'll come back to you with a price by email.</p>
@@ -438,7 +454,7 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
     <img loading="lazy" decoding="async" src="images/wall_three_banksy.jpg" alt="Three framed Banksy prints on a white wall" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; min-width: 0">
     <img loading="lazy" decoding="async" src="images/queen_unionjack_ornate.jpg" alt="Union Jack portrait in an ornate gold frame" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; min-width: 0">
     <img loading="lazy" decoding="async" src="images/love_blue.jpg" alt="Blue splatter print in a deep box frame" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; min-width: 0">
-    <img loading="lazy" decoding="async" src="images/noir_pair.jpg" alt="Pair of Thierry Noir heads float mounted in a white frame" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; min-width: 0">
+    <img loading="lazy" decoding="async" src="images/noir_skier.jpg" alt="Thierry Noir round skier painting float mounted in a white box frame with a green inner lining" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; min-width: 0">
   </section>
 
   <section class="m-xmas" style="margin: 72px auto 0 auto; max-width: 1100px; width: 100%; box-sizing: border-box; padding: 0 24px; display: flex; flex-wrap: wrap; gap: 32px; align-items: stretch">
@@ -592,11 +608,17 @@ src="https://www.facebook.com/tr?id=1788647805521425&ev=PageView&noscript=1"
   /* Quote requests go to Elijah's Apps Script (same web app as the other Premier Framing sites), tab "MFM quote requests". No notify field, so it is emailed. */
   var SHEET_URL="https://script.google.com/macros/s/AKfycbxadnXU1xpwHz77IsxcyHKN9ZCqIUWZnjHcop5fIpYc01oRxZyba95kdjFuN39mE2OT/exec";
   var f=document.getElementById("q-form"),o=document.getElementById("q-open"),sent=document.getElementById("q-sent"),err=document.getElementById("q-err"),opened=0;
-  if(o)o.addEventListener("click",function(){f.hidden=false;o.hidden=true;opened=Date.now();var i=f.querySelector("input[name=name]");if(i)i.focus();try{if(window.gtag)gtag("event","quote_form_open")}catch(e){}});
+  var step=1,steps=f?f.querySelectorAll(".q-step"):[],nextB=document.getElementById("q-next"),backB=document.getElementById("q-back");
+  function show(n){step=n;for(var i=0;i<steps.length;i++)steps[i].hidden=(i!==n-1);document.getElementById("q-stepno").textContent="Step "+n+" of 3";document.getElementById("q-bar").style.width=(n*33.34)+"%";backB.hidden=n===1;nextB.textContent=n===3?"SEND TO GARY":(n===2&&!f.elements.size.value&&!f.elements.framing_ideas.value?"SKIP":"CONTINUE");err.hidden=true;var fi=steps[n-1].querySelector("input,textarea");if(fi&&n>1)try{fi.focus({preventScroll:true})}catch(e){}var r=f.getBoundingClientRect();if(r.top<70)window.scrollBy({top:r.top-90,behavior:"smooth"})}
+  if(backB)backB.addEventListener("click",function(){if(step>1)show(step-1)});
+  if(f)f.addEventListener("input",function(){if(step===2)nextB.textContent=(f.elements.size.value||f.elements.framing_ideas.value)?"CONTINUE":"SKIP"});
+  if(o)o.addEventListener("click",function(){f.hidden=false;o.hidden=true;opened=Date.now();show(1);var i=f.querySelector("input[name=artwork]");if(i)i.focus();try{if(window.gtag)gtag("event","quote_form_open")}catch(e){}});
   function readPhoto(file){return new Promise(function(res){if(!file||!/^image\//.test(file.type||""))return res(null);var img=new Image(),u=URL.createObjectURL(file);img.onload=function(){var m=1600,w=img.naturalWidth,h=img.naturalHeight,k=Math.min(1,m/Math.max(w,h)),c=document.createElement("canvas");c.width=Math.round(w*k);c.height=Math.round(h*k);c.getContext("2d").drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);var d=c.toDataURL("image/jpeg",0.82);res({name:(file.name||"photo").replace(/\.[^.]+$/,"")+".jpg",type:"image/jpeg",data:d.split(",")[1]})};img.onerror=function(){URL.revokeObjectURL(u);var r=new FileReader();r.onload=function(){var d=String(r.result);res(d.indexOf(",")>-1?{name:file.name,type:file.type,data:d.split(",")[1]}:null)};r.onerror=function(){res(null)};if(file.size<8e6)r.readAsDataURL(file);else res(null)};img.src=u})}
   if(f)f.addEventListener("submit",function(ev){ev.preventDefault();var g=function(n){var e=f.elements[n];return e?String(e.value||"").trim():""};
+    if(step===1){if(!g("artwork")){err.textContent="Tell us what you'd like framed.";err.hidden=false;return}show(2);return}
+    if(step===2){show(3);return}
     var name=g("name"),email=g("email"),art=g("artwork");
-    if(!name||!email||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)||!art){err.textContent="Please add your name, a valid email and what you'd like framed.";err.hidden=false;return}
+    if(!name||!email||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)||!art){err.textContent="Please add your name and a valid email.";err.hidden=false;return}
     err.hidden=true;
     var btn=f.querySelector(".q-send");btn.disabled=true;btn.textContent="SENDING…";
     var bot=g("psf_ref_code")!==""||(opened&&Date.now()-opened<3000);
